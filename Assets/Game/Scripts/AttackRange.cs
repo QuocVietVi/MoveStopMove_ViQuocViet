@@ -1,17 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AttackRange : MonoBehaviour
 {
+    [SerializeField] private float range;
+    [SerializeField] private Collider[] enemies;
 
-    [SerializeField] private Player player;
-    private void OnTriggerEnter(Collider other)
+    Collider[] enemyInRange;
+    Collider[] enemyOutRange;
+
+    private void FixedUpdate()
     {
-        if (other.CompareTag("Finish"))
+        enemyInRange = Physics.OverlapSphere(this.transform.position, range);
+
+        foreach (var enemy in enemyInRange)
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            
+            enemy.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        enemyOutRange = enemies.Except(enemyInRange).ToArray();
+
+        foreach (var enemy in enemyOutRange)
+        {
+            enemy.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 }

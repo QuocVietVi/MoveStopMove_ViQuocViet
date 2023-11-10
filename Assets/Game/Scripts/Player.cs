@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -14,9 +15,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float range;
+    [SerializeField] private Collider[] enemies;
+    [SerializeField] private LayerMask enemyLayer;
+
     public Transform target;
     private Rigidbody rb;
     private Vector3 moveVector;
+    private bool CanAttack;
+    Collider[] enemyInRange;
+    Collider[] enemyOutRange;
 
 
     private string currentAnimName;
@@ -31,7 +39,7 @@ public class Player : MonoBehaviour
     {
         Move();
         rb.AddForce(Physics.gravity * gravityScale, ForceMode.Acceleration);
-
+        AttackRange();
     }
 
     private void Update()
@@ -53,11 +61,17 @@ public class Player : MonoBehaviour
             ChangeAnim("Run");
             Vector3 direction = Vector3.RotateTowards(transform.forward, moveVector, rotateSpeed * Time.fixedDeltaTime, 0.0f);
             transform.rotation = Quaternion.LookRotation(direction);
+            CanAttack = true;
             
             
         } else
         {
             ChangeAnim("Idle");
+            if (CanAttack == true && target != null)
+            {
+                Invoke(nameof(Attack), 0.5f);
+            }
+            CanAttack = false;
         }
 
         //rb.MovePosition(rb.position + moveVector);
@@ -79,6 +93,32 @@ public class Player : MonoBehaviour
         ChangeAnim("Attack");
     }
 
+    private void AttackRange()
+    {
+        int maxEnemyInRange = 1;
+        enemyInRange = new Collider[maxEnemyInRange];
+        int numEnemies = Physics.OverlapSphereNonAlloc(this.transform.position, range,enemyInRange,enemyLayer);
+        if(numEnemies > 0 )
+        {
+            for (int i = 0; i < enemyInRange.Length; i++)
+            {
+                target = enemyInRange[i].transform;
+            }
+        } else
+        {
+            target = null;
+        }
+
+        //enemyOutRange = enemies.Except(enemyInRange).ToArray();
+
+        //foreach (var enemy in enemyOutRange)
+        //{
+        //    //target = null;
+        //}
+    }
+
+
+
     private void ChangeAnim(string animName)
     {
         if (currentAnimName != animName)
@@ -87,5 +127,10 @@ public class Player : MonoBehaviour
             currentAnimName = animName;
             anim.SetTrigger(currentAnimName);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, range);
     }
 }
