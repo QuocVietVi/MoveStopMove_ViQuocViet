@@ -12,16 +12,19 @@ public class Character : MonoBehaviour
     [SerializeField] private Transform throwPoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float range;
-    [SerializeField] private Collider[] enemies;
+    //[SerializeField] private Collider[] enemies;
     [SerializeField] private LayerMask enemyLayer;
+    //[SerializeField] private GameObject targetPoint;
 
     public Transform target;
     protected Rigidbody rb;
-    Collider[] enemyInRange;
-    Collider[] enemyOutRange;
+    protected Collider[] enemyInRange;
+    //Collider[] enemyOutRange;
 
 
     private string currentAnimName;
+
+
 
     private void Update()
     {
@@ -29,36 +32,41 @@ public class Character : MonoBehaviour
         AttackRange();
     }
 
-    protected void Attack()
+    public void Attack()
     {
-        this.transform.LookAt(target.position);
-        Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
-        //bullet.rb.velocity = throwPoint.forward * bulletSpeed;
-        Vector3 f = target.position - bullet.transform.position;
-        f = f.normalized;
-        f = f * bulletSpeed;
-        bullet.rb.AddForce(f);
+        if (target != null)
+        {
+            this.transform.LookAt(target.position);
+            Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
+            //bullet.rb.velocity = throwPoint.forward * bulletSpeed;
+            bullet.attacker = this;
+
+            Vector3 f = target.position - bullet.transform.position;
+            f = f.normalized;
+            f = f * bulletSpeed;
+            bullet.rb.AddForce(f);
+        }
+       
 
 
 
         ChangeAnim(ConstantAnim.ATTACK);
     }
 
-    private void AttackRange()
+    protected virtual void AttackRange()
     {
-        int maxEnemyInRange = 1;
+        int maxEnemyInRange = 2;
         enemyInRange = new Collider[maxEnemyInRange];
         int numEnemies = Physics.OverlapSphereNonAlloc(this.transform.position, range, enemyInRange, enemyLayer);
-        if (numEnemies > 0)
+        Player player = GetComponent<Player>();
+        if (numEnemies > 0 )
         {
-            for (int i = 0; i < enemyInRange.Length; i++)
-            {
-                target = enemyInRange[i].transform;
-            }
+            target = enemyInRange[0].transform;
         }
         else
         {
             target = null;
+
         }
 
         //enemyOutRange = enemies.Except(enemyInRange).ToArray();
@@ -69,9 +77,10 @@ public class Character : MonoBehaviour
         //}
     }
 
-    public void OnDead()
+    protected virtual void OnDead()
     {
         ChangeAnim(ConstantAnim.DEAD);
+        Destroy(gameObject, 1f);
     }
 
 

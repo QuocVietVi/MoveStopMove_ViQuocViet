@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : Singleton<CameraFollow> 
 {
-    [SerializeField] private Player player;
+    private Player player;
     [SerializeField] private float speed;
     [SerializeField] private Vector3 offset;
 
@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         camera = this.transform;
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 
@@ -27,7 +26,22 @@ public class CameraFollow : MonoBehaviour
 
     private void Follow()
     {
-        camera.DOMove(player.transform.position + offset, speed * Time.deltaTime);
+        if (player != null)
+        {
+            camera.DOMove(player.transform.position + offset, speed * Time.deltaTime);
+
+        }
+        else
+        {
+            return;
+        }
+
+    }
+
+    public void FindPlayer()
+    {
+        player = FindObjectOfType<Player>();
+        offset = camera.position - player.transform.position;
 
     }
 }

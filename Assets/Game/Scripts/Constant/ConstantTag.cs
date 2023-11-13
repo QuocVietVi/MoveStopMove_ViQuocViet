@@ -7,13 +7,11 @@ public static class ConstantTag
     public static string PLAYER = "Player";
 
     public static string ENEMY = "Enemy";
+
+    public static string WEAPON = "Weapon";
 }
 
-public static class ConstantLayer
-{
-    public static string ENEMY = "Enemy";
 
-}
 
 public static class ConstantAnim
 {

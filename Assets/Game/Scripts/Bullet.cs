@@ -4,12 +4,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Rigidbody rb;
-    private Character attacker;
+    [SerializeField] private Transform bullet;
+    [SerializeField] private float rotateSpeed;
+    public Character attacker;
     // Start is called before the first frame update
     void Start()
     {
-        attacker = GetComponent<Character>();
+        //attacker = GetComponent<Character>();
         OnInit();
+    }
+
+    private void Update()
+    {
+        bullet.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime, Space.Self);
     }
 
     public void OnInit()
@@ -26,20 +33,22 @@ public class Bullet : MonoBehaviour
     {
         Character victim = other.GetComponent<Character>();
 
-        if (victim != null && victim != attacker)
-        {
-            if (other.CompareTag(ConstantTag.ENEMY) || other.CompareTag(ConstantTag.PLAYER))
-            {
-                Destroy(gameObject);
-                victim.OnDead();
-                Destroy(victim.gameObject, 2f);
-
-            }
-        }
-        else
+        if (victim == null && victim == attacker)
         {
             return;
         }
+        if (other.CompareTag(ConstantTag.ENEMY) || other.CompareTag(ConstantTag.PLAYER))
+        {
+            OnDespawn();
+            //Destroy(gameObject);
+            //victim.OnDead();
+            //Destroy(victim.gameObject, 2f);
+
+        }
+        //else
+        //{
+        //    return;
+        //}
 
         //if (other.CompareTag(ConstantTag.ENEMY))
         //{
