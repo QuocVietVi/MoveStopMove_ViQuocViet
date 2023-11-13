@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    public Collider collider;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 }
