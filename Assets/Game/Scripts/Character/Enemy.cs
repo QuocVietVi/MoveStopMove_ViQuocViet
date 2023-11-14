@@ -9,18 +9,17 @@ public class Enemy : Character
     [SerializeField] private Vector3 walkPoint;
     [SerializeField] private float walkPointRange;
     [SerializeField] private LayerMask layerGround;
-    [SerializeField] private Collider collider;
-
 
 
     private IState currentState;
     private bool walkPointSet;
-    private bool canAttack;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         ChangeState(new PatrolState());
+        isDead = false;
+
     }
 
     private void FixedUpdate()
@@ -86,19 +85,30 @@ public class Enemy : Character
     protected override void AttackRange()
     {
         base.AttackRange();
-
-        if (enemyInRange[0] != this.collider)
+        if (isDead == false)
         {
-            target = enemyInRange[0].transform;
+            if (enemyInRange[0] != this.collider)
+            {
+                target = enemyInRange[0].transform;
+            }
+            else if (enemyInRange[0] == this.collider && enemyInRange[1] != null)
+            {
+                target = enemyInRange[1].transform;
+            }
+            else
+            {
+                target = null;
+            }
+            if (target != null)
+            {
+                ChangeState(new IdleState());
+            }
+            else
+            {
+                ChangeState(new PatrolState());
+            }
         }
-        else if (enemyInRange[0] == this.collider && enemyInRange[1] != null)
-        {
-            target = enemyInRange[1].transform;
-        }
-        else
-        {
-            target = null;
-        }
+        
 
     }
 
@@ -106,7 +116,6 @@ public class Enemy : Character
     {
         base.OnDead();
         ChangeState(null);
-        canAttack = false;
     }
 
     public void ChangeState(IState newState)

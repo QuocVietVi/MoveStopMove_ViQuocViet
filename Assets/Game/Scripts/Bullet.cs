@@ -1,3 +1,4 @@
+using Lean.Pool;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         //attacker = GetComponent<Character>();
-        OnInit();
+        //OnInit();
     }
 
     private void Update()
@@ -21,12 +22,13 @@ public class Bullet : MonoBehaviour
 
     public void OnInit()
     {
-        Invoke(nameof(OnDespawn), 4f);
+        Invoke(nameof(OnDespawn), 0.5f);
     }
 
     public void OnDespawn()
     {
-        Destroy(gameObject);
+        LeanPool.Despawn(this);
+        
     }
 
     private void OnTriggerEnter(Collider other)

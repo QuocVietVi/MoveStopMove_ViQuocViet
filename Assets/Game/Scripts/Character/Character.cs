@@ -1,3 +1,4 @@
+using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,13 @@ public class Character : MonoBehaviour
 {
     [SerializeField] protected float gravityScale;
     [SerializeField] private Animator anim;
+    [SerializeField] protected GameObject weapon;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float range;
+    [SerializeField] protected Collider collider;
+
     //[SerializeField] private Collider[] enemies;
     [SerializeField] private LayerMask enemyLayer;
     //[SerializeField] private GameObject targetPoint;
@@ -19,6 +23,8 @@ public class Character : MonoBehaviour
     public Transform target;
     protected Rigidbody rb;
     protected Collider[] enemyInRange;
+    protected bool canAttack;
+    protected bool isDead;
     //Collider[] enemyOutRange;
 
 
@@ -36,21 +42,26 @@ public class Character : MonoBehaviour
     {
         if (target != null)
         {
+            weapon.SetActive(false);
+            Invoke(nameof(ActiveWeapon), 0.5f);
             this.transform.LookAt(target.position);
-            Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
-            //bullet.rb.velocity = throwPoint.forward * bulletSpeed;
+            //Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
+            Bullet bullet = LeanPool.Spawn(bulletPrefab, throwPoint.position, throwPoint.rotation);
+            bullet.rb.velocity = (target.position - this.transform.position) * bulletSpeed * Time.fixedDeltaTime;
             bullet.attacker = this;
-
-            Vector3 f = target.position - bullet.transform.position;
-            f = f.normalized;
-            f = f * bulletSpeed;
-            bullet.rb.AddForce(f);
+            bullet.OnInit();
+            //Vector3 f = target.position - bullet.transform.position;
+            //f = f.normalized;
+            //f = f * bulletSpeed;
+            //bullet.rb.AddForce(f);
         }
        
-
-
-
         ChangeAnim(ConstantAnim.ATTACK);
+    }
+
+    private void ActiveWeapon()
+    {
+        weapon.SetActive(true);
     }
 
     protected virtual void AttackRange()
@@ -58,7 +69,6 @@ public class Character : MonoBehaviour
         int maxEnemyInRange = 2;
         enemyInRange = new Collider[maxEnemyInRange];
         int numEnemies = Physics.OverlapSphereNonAlloc(this.transform.position, range, enemyInRange, enemyLayer);
-        Player player = GetComponent<Player>();
         if (numEnemies > 0 )
         {
             target = enemyInRange[0].transform;
@@ -79,6 +89,10 @@ public class Character : MonoBehaviour
 
     protected virtual void OnDead()
     {
+        canAttack = false;
+        isDead = true;
+        gravityScale = 0;
+        collider.enabled = false;
         ChangeAnim(ConstantAnim.DEAD);
         Destroy(gameObject, 1f);
     }

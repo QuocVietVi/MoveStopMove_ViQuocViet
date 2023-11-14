@@ -198,13 +198,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityScale: 10
   anim: {fileID: 367011101125888175}
+  weapon: {fileID: 3379764233570879466}
   bulletPrefab: {fileID: 3172990705057392822, guid: 2c1e1ff9ad650334b8e07fef08ae4b32, type: 3}
   throwPoint: {fileID: 3379764233844855346}
-  bulletSpeed: 300
+  bulletSpeed: 80
   range: 5
-  enemies:
-  - {fileID: 0}
-  - {fileID: 0}
+  collider: {fileID: 3379764232653290806}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -212,7 +211,6 @@ MonoBehaviour:
   moveSpeed: 10
   joystick: {fileID: 0}
   rotateSpeed: 10
-  collider: {fileID: 3379764232653290806}
 --- !u!23 &3379764232653290803
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -433,3 +431,8 @@ PrefabInstance:
     - {fileID: -3097233879203085777, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
     - {fileID: 7748133526331698283, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
+--- !u!1 &3379764233570879466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9176456548639078348, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
+  m_PrefabInstance: {fileID: 5890153288084516902}
+  m_PrefabAsset: {fileID: 0}

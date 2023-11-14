@@ -9,10 +9,8 @@ public class Player : Character
     [SerializeField] private float moveSpeed;
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private Collider collider;
 
-    private bool canAttack;
-    private bool isDead;
+
     private Vector3 moveVector;
     
 
@@ -20,14 +18,13 @@ public class Player : Character
     {
         rb = GetComponent<Rigidbody>();
         joystick = FindObjectOfType<FloatingJoystick>();
-        collider = GetComponent<Collider>();
         isDead = false;
     }
 
     private void FixedUpdate()
     {
         Move();
-        Physics.IgnoreCollision(collider, collider);
+        Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
 
     }
 
@@ -65,26 +62,29 @@ public class Player : Character
     protected override void AttackRange()
     {
         base.AttackRange();
-        if (enemyInRange[0] != this.collider)
+        if (isDead == false)
         {
-            target = enemyInRange[0].transform;
+            if (enemyInRange[0] != this.GetComponent<Collider>())
+            {
+                target = enemyInRange[0].transform;
+            }
+            else if (enemyInRange[0] == this.GetComponent<Collider>() && enemyInRange[1] != null)
+            {
+                target = enemyInRange[1].transform;
+            }
+            else
+            {
+                target = null;
+            }
         }
-        else if (enemyInRange[0] == this.collider && enemyInRange[1] != null)
-        {
-            target = enemyInRange[1].transform;
-        }
-        else
-        {
-            target = null;
-        }
+        
     }
 
     protected override void OnDead()
     {
         base.OnDead();
         moveSpeed = 0.0f;
-        canAttack = false;
-        isDead = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
