@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     public void OnInit()
     {
-        Invoke(nameof(OnDespawn), 0.5f);
+        Invoke(nameof(OnDespawn), 10f);
     }
 
     public void OnDespawn()
@@ -31,44 +31,44 @@ public class Bullet : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Character victim = other.GetComponent<Character>();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Character victim = other.GetComponent<Character>();
 
-        if (victim == null && victim == attacker)
-        {
-            return;
-        }
-        if (other.CompareTag(ConstantTag.ENEMY) || other.CompareTag(ConstantTag.PLAYER))
-        {
-            OnDespawn();
-            //Destroy(gameObject);
-            //victim.OnDead();
-            //Destroy(victim.gameObject, 2f);
+    //    if (victim == null && victim == attacker)
+    //    {
+    //        return;
+    //    }
+    //    if (other.CompareTag(ConstantTag.ENEMY) || other.CompareTag(ConstantTag.PLAYER))
+    //    {
+    //        OnDespawn();
+    //        //Destroy(gameObject);
+    //        //victim.OnDead();
+    //        //Destroy(victim.gameObject, 2f);
 
-        }
-        //else
-        //{
-        //    return;
-        //}
+    //    }
+    //    //else
+    //    //{
+    //    //    return;
+    //    //}
 
-        //if (other.CompareTag(ConstantTag.ENEMY))
-        //{
-        //    Destroy(gameObject);
-        //    Character enemy = other.GetComponent<Enemy>();
-        //    enemy.OnDead();
-        //    Destroy(enemy.gameObject, 2f);
+    //    //if (other.CompareTag(ConstantTag.ENEMY))
+    //    //{
+    //    //    Destroy(gameObject);
+    //    //    Character enemy = other.GetComponent<Enemy>();
+    //    //    enemy.OnDead();
+    //    //    Destroy(enemy.gameObject, 2f);
 
-        //}
+    //    //}
 
-        //if (other.CompareTag(ConstantTag.PLAYER))
-        //{
-        //    Destroy(gameObject);
-        //    Player player = other.GetComponent<Player>();
-        //    player.OnDead();
-        //    player.GetComponent<Collider>().enabled = false;
-        //}
-    }
+    //    //if (other.CompareTag(ConstantTag.PLAYER))
+    //    //{
+    //    //    Destroy(gameObject);
+    //    //    Player player = other.GetComponent<Player>();
+    //    //    player.OnDead();
+    //    //    player.GetComponent<Collider>().enabled = false;
+    //    //}
+    //}
 
 
 }

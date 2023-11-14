@@ -141,6 +141,7 @@ MonoBehaviour:
   layerGround:
     serializedVersion: 2
     m_Bits: 8
+  targetPoint: {fileID: 1621629007773067342}
 --- !u!195 &1621629007152972338
 NavMeshAgent:
   m_ObjectHideFlags: 0

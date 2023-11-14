@@ -9,20 +9,21 @@ public class PatrolState : IState
     public void OnEnter(Enemy enemy)
     {
         timer = 0;
-        randomTime = Random.Range(2f, 4f);
+        randomTime = Random.Range(3f, 6f);
     }
 
     public void OnExcute(Enemy enemy)
     {
         timer += Time.deltaTime;
-        if (timer < randomTime)
+        if (timer > randomTime || enemy.target != null)
         {
-            enemy.Moving();
+            enemy.ChangeState(new IdleState());
 
         }
         else
         {
-            enemy.ChangeState(new IdleState());
+            enemy.Moving();
+
         }
     }
 

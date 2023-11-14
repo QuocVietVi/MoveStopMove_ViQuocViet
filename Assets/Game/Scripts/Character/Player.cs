@@ -64,6 +64,7 @@ public class Player : Character
         base.AttackRange();
         if (isDead == false)
         {
+            Enemy enemy = GetComponent<Enemy>();
             if (enemyInRange[0] != this.GetComponent<Collider>())
             {
                 target = enemyInRange[0].transform;
@@ -76,6 +77,18 @@ public class Player : Character
             {
                 target = null;
             }
+            if (enemy != null)
+            {
+                if (target != null)
+                {
+                    enemy.ActiveTargetPoint();
+                }
+                else
+                {
+                    enemy.DeActiveTargetPoint();
+                }
+            }
+           
         }
         
     }
@@ -84,6 +97,7 @@ public class Player : Character
     {
         base.OnDead();
         moveSpeed = 0.0f;
+        joystick.enabled = false;
 
     }
 
@@ -91,11 +105,15 @@ public class Player : Character
     {
         if (other.CompareTag(ConstantTag.WEAPON))
         {
-            if (other.GetComponent<Bullet>().attacker == this)
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet.attacker == this)
             {
                 return;
             }
-            OnDead();
+            else {
+                OnDead();
+                bullet.OnDespawn();
+            }
         }
     }
 

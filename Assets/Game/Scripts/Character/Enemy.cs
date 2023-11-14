@@ -9,7 +9,7 @@ public class Enemy : Character
     [SerializeField] private Vector3 walkPoint;
     [SerializeField] private float walkPointRange;
     [SerializeField] private LayerMask layerGround;
-
+    public GameObject targetPoint;
 
     private IState currentState;
     private bool walkPointSet;
@@ -54,13 +54,17 @@ public class Enemy : Character
 
     public void Stop()
     {
-        agent.speed = 0f;
+        agent.SetDestination(transform.position); //đứng im
         ChangeAnim(ConstantAnim.IDLE);
         if (canAttack == true && target != null)
         {
             Invoke(nameof(StartAttackState), 1f);
+            canAttack = true;
         }
-        canAttack = false;
+        if (target == null)
+        {
+            canAttack = false;
+        }
     }
 
     private void SearchWalkPoint()
@@ -85,7 +89,7 @@ public class Enemy : Character
     protected override void AttackRange()
     {
         base.AttackRange();
-        if (isDead == false)
+        if (isDead == false && enemyInRange != null)
         {
             if (enemyInRange[0] != this.collider)
             {
@@ -99,14 +103,14 @@ public class Enemy : Character
             {
                 target = null;
             }
-            if (target != null)
-            {
-                ChangeState(new IdleState());
-            }
-            else
-            {
-                ChangeState(new PatrolState());
-            }
+            //if (target != null)
+            //{
+            //    ChangeState(new IdleState());
+            //}
+            //else
+            //{
+            //    ChangeState(new PatrolState());
+            //}
         }
         
 
@@ -116,6 +120,16 @@ public class Enemy : Character
     {
         base.OnDead();
         ChangeState(null);
+    }
+
+    public void ActiveTargetPoint()
+    {
+        targetPoint.SetActive(true);
+    }
+
+    public void DeActiveTargetPoint()
+    {
+        targetPoint.SetActive(false);
     }
 
     public void ChangeState(IState newState)
@@ -137,11 +151,19 @@ public class Enemy : Character
     {
         if (other.CompareTag(ConstantTag.WEAPON))
         {
-            if (other.GetComponent<Bullet>().attacker == this)
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet.attacker == this)
             {
                 return;
             }
-            OnDead();
+            else
+            {
+                OnDead();
+                bullet.OnDespawn();
+                LevelManager.Instance.listEnemies.Remove(this);
+                
+
+            }
         }
     }
 }
