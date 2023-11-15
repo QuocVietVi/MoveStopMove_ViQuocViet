@@ -8,6 +8,7 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform startPoint;
     [SerializeField] private float maxEnemiesOnGround;
+    public int characterLevel;
     public float maxEnemies;
     public List<Enemy> listEnemies = new List<Enemy>();
     public Player playerPrefab;

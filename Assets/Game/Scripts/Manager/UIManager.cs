@@ -8,7 +8,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Text enemyAlive;
     [SerializeField] private float numberEnemiesAlive;
 
-
+        
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
