@@ -64,7 +64,7 @@ public class Player : Character
         base.AttackRange();
         if (isDead == false)
         {
-            Enemy enemy = GetComponent<Enemy>();
+            Enemy enemy = target.GetComponent<Enemy>();
             if (enemyInRange[0] != this.GetComponent<Collider>())
             {
                 target = enemyInRange[0].transform;
@@ -79,14 +79,19 @@ public class Player : Character
             }
             if (enemy != null)
             {
-                if (target != null)
-                {
-                    enemy.ActiveTargetPoint();
-                }
-                else
-                {
-                    enemy.DeActiveTargetPoint();
-                }
+                //if (target != null)
+                //{
+                //    enemy.ActiveTargetPoint();
+                //}
+                //else
+                //{
+                //    enemy.DeActiveTargetPoint();
+                //}
+                enemy.targetPoint.SetActive(true);
+            }
+            else
+            {
+                return;
             }
            
         }

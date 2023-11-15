@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform startPoint;
-    [SerializeField] private float maxEnemiesSpawn;
+    [SerializeField] private float maxEnemiesOnGround;
+    public float maxEnemies;
     public List<Enemy> listEnemies = new List<Enemy>();
     public Player playerPrefab;
     public Enemy enemyPrefab;
@@ -23,11 +25,15 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Update()
     {
-        if (listEnemies.Count < maxEnemiesSpawn)
+        if (listEnemies.Count < maxEnemiesOnGround)
         {
-            posX = Random.Range(-50, 50);
+            posX = Random.Range(-42, 42);
             posZ = Random.Range(-38, 38);
             SpawnEnemy();
+        }
+        if (listEnemies.Count > maxEnemies - 2)
+        {
+            this.enabled = false;
         }
     }
     private void SpawnPlayer()
@@ -40,7 +46,7 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnEnemies()
     {
         //this.gameObject.SetActive(false);
-        for (int i = 0; i <= maxEnemiesSpawn; i++)
+        for (int i = 0; i <= maxEnemiesOnGround; i++)
         {
             posX = Random.Range(-50, 50);
             posZ = Random.Range(-38, 38);

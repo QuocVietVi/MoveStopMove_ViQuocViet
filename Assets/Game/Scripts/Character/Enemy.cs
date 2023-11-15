@@ -91,7 +91,7 @@ public class Enemy : Character
         base.AttackRange();
         if (isDead == false && enemyInRange != null)
         {
-            if (enemyInRange[0] != this.collider)
+            if (enemyInRange[0] != this.collider && enemyInRange[0] != null)
             {
                 target = enemyInRange[0].transform;
             }
@@ -161,7 +161,7 @@ public class Enemy : Character
                 OnDead();
                 bullet.OnDespawn();
                 LevelManager.Instance.listEnemies.Remove(this);
-                
+                LevelManager.Instance.maxEnemies--;
 
             }
         }
