@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     public void OnInit()
     {
-        Invoke(nameof(OnDespawn), 0.5f);
+        Invoke(nameof(OnDespawn), 0.7f);
     }
 
     public void OnDespawn()

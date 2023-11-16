@@ -25,7 +25,6 @@ public class Player : Character
     {
         Move();
         Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
-
     }
 
     private void Move()

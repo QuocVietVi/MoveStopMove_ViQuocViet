@@ -211,6 +211,7 @@ MonoBehaviour:
   moveSpeed: 10
   joystick: {fileID: 0}
   rotateSpeed: 10
+  attackRange: {fileID: 3379764232288817896}
 --- !u!23 &3379764232653290803
 MeshRenderer:
   m_ObjectHideFlags: 0
