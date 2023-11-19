@@ -19,7 +19,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        SpawnPlayer();
+        //SpawnPlayer();
         SpawnEnemies();
 
     }

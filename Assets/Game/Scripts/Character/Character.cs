@@ -11,20 +11,23 @@ public class Character : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] protected GameObject weapon;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform throwPoint;
+    public Transform throwPoint;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private float range;
     [SerializeField] protected Collider collider;
-
+  
+    
+    
     //[SerializeField] private Collider[] enemies;
     [SerializeField] private LayerMask enemyLayer;
     //[SerializeField] private GameObject targetPoint;
-
+    public float range;
+    public float level;
     public Transform target;
     protected Rigidbody rb;
     protected Collider[] enemyInRange;
     protected bool canAttack;
     protected bool isDead;
+    
     //Collider[] enemyOutRange;
 
 

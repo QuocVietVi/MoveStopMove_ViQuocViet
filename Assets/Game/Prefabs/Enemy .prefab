@@ -157,6 +157,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  level: 0
   target: {fileID: 0}
   agent: {fileID: 1621629007152972338}
   walkPoint: {x: 0, y: 0, z: 0}

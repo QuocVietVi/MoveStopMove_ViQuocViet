@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class CameraFollow : Singleton<CameraFollow> 
 {
-    private Player player;
+    [SerializeField] private Player player;
     [SerializeField] private float speed;
-    [SerializeField] private Vector3 offset;
+    public Vector3 offset;
 
     private Transform camera;
 
@@ -21,7 +21,17 @@ public class CameraFollow : Singleton<CameraFollow>
     private void Update()
     {
         Follow();
-
+        if (player.level == 8)
+        {
+            offset = new Vector3(0, 17f, -21f);
+        }else if (player.level == 16)
+        {
+            offset = new Vector3(0, 19f, -23f);
+        }
+        else if (player.level == 24)
+        {
+            offset = new Vector3(0, 21f, -25f);
+        }
     }
 
     private void Follow()
