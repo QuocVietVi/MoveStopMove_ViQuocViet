@@ -18,7 +18,7 @@ public class CameraFollow : Singleton<CameraFollow>
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Follow();
         if (player.level == 8)
@@ -38,7 +38,7 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         if (player != null)
         {
-            camera.DOMove(player.transform.position + offset, speed * Time.deltaTime);
+            camera.DOMove(player.transform.position + offset, speed * Time.fixedDeltaTime);
 
         }
         else

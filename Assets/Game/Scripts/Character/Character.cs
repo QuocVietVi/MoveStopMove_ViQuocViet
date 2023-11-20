@@ -2,8 +2,21 @@ using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-
+public enum CharName
+{
+    Hoang_Long = 0,
+    Hung_Duc = 1,
+    The_Manh = 2,
+    Dai_Fuma = 3,
+    Tuan_Dat = 4,
+    Tho_Khiem = 5,
+    Tony_Do = 6,
+    Bach_Beo = 7,
+    Phuong_Be = 8,
+    Viet_Dep_Zai = 9
+}
 [RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
@@ -11,15 +24,14 @@ public class Character : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] protected GameObject weapon;
     [SerializeField] private Bullet bulletPrefab;
-    public Transform throwPoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] protected Collider collider;
-  
     
     
     //[SerializeField] private Collider[] enemies;
     [SerializeField] private LayerMask enemyLayer;
     //[SerializeField] private GameObject targetPoint;
+    public Transform throwPoint;
     public float range;
     public float level;
     public Transform target;
@@ -30,15 +42,19 @@ public class Character : MonoBehaviour
     
     //Collider[] enemyOutRange;
 
-
+    
     private string currentAnimName;
 
-
-
+    private void Start()
+    {
+        level = 1;
+    }
     private void Update()
     {
         rb.AddForce(Physics.gravity * gravityScale, ForceMode.Acceleration);
         AttackRange();
+        
+
     }
 
     public void Attack()
