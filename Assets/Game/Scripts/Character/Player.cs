@@ -79,15 +79,15 @@ public class Player : Character
             }
             if (enemy != null)
             {
-                //if (target != null)
-                //{
-                //    enemy.ActiveTargetPoint();
-                //}
-                //else
-                //{
-                //    enemy.DeActiveTargetPoint();
-                //}
-                enemy.targetPoint.SetActive(true);
+                if (target != null)
+                {
+                    enemy.ActiveTargetPoint();
+                }
+                else
+                {
+                    enemy.DeActiveTargetPoint();
+                }
+                //.targetPoint.SetActive(true);
             }
             else
             {
@@ -116,7 +116,7 @@ public class Player : Character
                 return;
             }
             else {
-                OnDead();
+                //OnDead();
                 bullet.OnDespawn();
             }
         }

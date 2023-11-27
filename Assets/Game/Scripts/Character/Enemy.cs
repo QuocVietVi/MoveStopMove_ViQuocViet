@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Lean.Pool;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +30,16 @@ public class Enemy : Character
             currentState.OnExcute(this);
         }
         
+
+    }
+    
+    public void OnInit()
+    {
+        canAttack = true;
+        isDead = false;
+        gravityScale = 9;
+        collider.enabled = true;
+        ChangeState(new IdleState());
 
     }
 
@@ -103,23 +114,19 @@ public class Enemy : Character
             {
                 target = null;
             }
-            //if (target != null)
-            //{
-            //    ChangeState(new IdleState());
-            //}
-            //else
-            //{
-            //    ChangeState(new PatrolState());
-            //}
         }
         
 
     }
-
+    private void Despawn()
+    {
+        LeanPool.Despawn(this);
+    }
     protected override void OnDead()
     {
         base.OnDead();
         ChangeState(null);
+        Invoke(nameof(Despawn),1f);
     }
 
     public void ActiveTargetPoint()

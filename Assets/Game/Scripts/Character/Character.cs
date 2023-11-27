@@ -35,6 +35,7 @@ public class Character : MonoBehaviour
     public float range;
     public float level;
     public Transform target;
+    public WeaponData weaponData;
     protected Rigidbody rb;
     protected Collider[] enemyInRange;
     protected bool canAttack;
@@ -114,7 +115,7 @@ public class Character : MonoBehaviour
         gravityScale = 0;
         collider.enabled = false;
         ChangeAnim(ConstantAnim.DEAD);
-        Destroy(gameObject, 1f);
+        //Destroy(gameObject, 1f);
     }
 
 

@@ -1,3 +1,4 @@
+using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(enemyPrefab, new Vector3(posX, 0, posZ), Quaternion.identity);
+        //Enemy enemy = Instantiate(enemyPrefab, new Vector3(posX, 0, posZ), Quaternion.identity);
+        Enemy enemy = LeanPool.Spawn(enemyPrefab);
+        enemy.transform.position = new Vector3(posX, 0, posZ);
+        enemy.OnInit();
         listEnemies.Add(enemy);
     }
 

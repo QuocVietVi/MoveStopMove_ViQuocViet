@@ -325,6 +325,12 @@ MonoBehaviour:
   range: 5
   level: 0
   target: {fileID: 0}
+  weaponData:
+    weaponType: 0
+    range: 0
+    speed: 0
+    bullet: {fileID: 0}
+    weapon: {fileID: 0}
   moveSpeed: 10
   joystick: {fileID: 0}
   rotateSpeed: 10
@@ -1297,7 +1303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &431579638
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2184,7 +2190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &705507994
 Light:
   m_ObjectHideFlags: 0
@@ -3282,6 +3288,12 @@ MonoBehaviour:
   range: 5
   level: 0
   target: {fileID: 0}
+  weaponData:
+    weaponType: 0
+    range: 0
+    speed: 0
+    bullet: {fileID: 0}
+    weapon: {fileID: 0}
   agent: {fileID: 993954244}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
@@ -5509,6 +5521,6 @@ PrefabInstance:
       value: -85.628
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: -3097233879203085777, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
-    - {fileID: 7748133526331698283, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}

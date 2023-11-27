@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private WeaponSO weaponSO;
+
+    private WeaponData GetWeponData(WeaponType weaponType)
     {
-        
+        List<WeaponData> weaponData = weaponSO.weapons;
+        for (int i = 0; i < weaponData.Count; i++)
+        {
+            if (weaponType == weaponData[i].weaponType)
+            {
+                return weaponData[i];
+            }
+        }
+        return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
