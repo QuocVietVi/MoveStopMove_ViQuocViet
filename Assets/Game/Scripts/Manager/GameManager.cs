@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public enum GameState
+{
+    MainMenu, ChooseWeapon, GamePlay, Finish
+}
+
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private WeaponSO weaponSO;
+    private GameState gameState;
 
-    private WeaponData GetWeponData(WeaponType weaponType)
+    private void Awake()
+    {
+        ChangeState(GameState.MainMenu);
+    }
+
+    public WeaponData GetWeponData(WeaponType weaponType)
     {
         List<WeaponData> weaponData = weaponSO.weapons;
         for (int i = 0; i < weaponData.Count; i++)
@@ -17,6 +28,16 @@ public class GameManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void ChangeState(GameState state)
+    {
+        gameState = state;
+    }
+
+    public bool IsState(GameState state)
+    {
+        return gameState == state;
     }
 
 }

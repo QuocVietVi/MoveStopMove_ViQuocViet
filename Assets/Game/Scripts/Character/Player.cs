@@ -20,12 +20,22 @@ public class Player : Character
         rb = GetComponent<Rigidbody>();
         joystick = FindObjectOfType<FloatingJoystick>();
         isDead = false;
+        //if (weaponData == null)
+        //{
+        //    weaponData = GameManager.Instance.GetWeponData(weaponType);
+        //}
+
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if (GameManager.Instance.IsState(GameState.GamePlay))
+        {
+            Move();
+        }
         Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
+        weaponData = GameManager.Instance.GetWeponData(weaponType);
+
     }
 
     private void Move()

@@ -36,6 +36,7 @@ public class Character : MonoBehaviour
     public float level;
     public Transform target;
     public WeaponData weaponData;
+    public WeaponType weaponType;
     protected Rigidbody rb;
     protected Collider[] enemyInRange;
     protected bool canAttack;
@@ -65,7 +66,7 @@ public class Character : MonoBehaviour
             weapon.SetActive(false);
             Invoke(nameof(ActiveWeapon), 0.5f);
             this.transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
-            
+            //bulletPrefab = weaponData.bullet;
             //Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
             Bullet bullet = LeanPool.Spawn(bulletPrefab, throwPoint.position, throwPoint.rotation);
             bullet.rb.velocity = (target.position - this.transform.position) * bulletSpeed * Time.fixedDeltaTime;

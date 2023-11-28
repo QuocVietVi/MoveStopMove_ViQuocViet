@@ -331,6 +331,7 @@ MonoBehaviour:
     speed: 0
     bullet: {fileID: 0}
     weapon: {fileID: 0}
+  weaponType: 1
   moveSpeed: 10
   joystick: {fileID: 0}
   rotateSpeed: 10
@@ -1222,7 +1223,7 @@ RectTransform:
   m_Children:
   - {fileID: 1324669640}
   m_Father: {fileID: 906921742}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1297,13 +1298,14 @@ GameObject:
   - component: {fileID: 431579638}
   - component: {fileID: 431579640}
   - component: {fileID: 431579639}
+  - component: {fileID: 431579641}
   m_Layer: 5
   m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &431579638
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1316,10 +1318,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1670927112}
   - {fileID: 786545669}
   - {fileID: 1778377122}
   m_Father: {fileID: 906921742}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1364,6 +1367,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431579637}
   m_CullTransparentMesh: 1
+--- !u!114 &431579641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431579637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5251f5533eeb3d7429923c548a830a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSO: {fileID: 11400000, guid: 259ab1c9e1e73184fb382ebe68b78a5a, type: 2}
 --- !u!1 &472008424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1705,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 906921742}
+    m_TransformParent: {fileID: 431579638}
     m_Modifications:
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_Pivot.x
@@ -1701,7 +1717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2343,7 +2359,7 @@ RectTransform:
   - {fileID: 142945959}
   - {fileID: 266566149}
   m_Father: {fileID: 431579638}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2785,9 +2801,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 431579638}
   - {fileID: 371088111}
-  - {fileID: 1670927112}
+  - {fileID: 431579638}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2810,6 +2825,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAlive: {fileID: 1433536297}
   numberEnemiesAlive: 0
+  play: {fileID: 1905274817}
+  mainMenu: {fileID: 786545668}
+  alive: {fileID: 1751052422}
 --- !u!1 &925368438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3294,6 +3312,7 @@ MonoBehaviour:
     speed: 0
     bullet: {fileID: 0}
     weapon: {fileID: 0}
+  weaponType: 0
   agent: {fileID: 993954244}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
@@ -4610,12 +4629,12 @@ GameObject:
   - component: {fileID: 1751052425}
   - component: {fileID: 1751052424}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Alive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1751052423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4623,7 +4642,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751052422}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4713,7 +4732,7 @@ RectTransform:
   - {fileID: 492738928}
   - {fileID: 1933497544}
   m_Father: {fileID: 431579638}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

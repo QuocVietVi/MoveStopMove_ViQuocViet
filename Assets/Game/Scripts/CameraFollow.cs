@@ -15,6 +15,7 @@ public class CameraFollow : Singleton<CameraFollow>
     private void Awake()
     {
         camera = this.transform;
+        offset = new Vector3(0f, 6f, -8.8f);
 
     }
 

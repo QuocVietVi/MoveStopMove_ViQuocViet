@@ -20,23 +20,26 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        //SpawnPlayer();
-        SpawnEnemies();
+
 
     }
 
     private void Update()
     {
-        if (listEnemies.Count < maxEnemiesOnGround)
+        if (GameManager.Instance.IsState(GameState.GamePlay))
         {
-            posX = Random.Range(-42, 42);
-            posZ = Random.Range(-38, 38);
-            SpawnEnemy();
+            if (listEnemies.Count < maxEnemiesOnGround)
+            {
+                posX = Random.Range(-42, 42);
+                posZ = Random.Range(-38, 38);
+                SpawnEnemy();
+            }
+            if (listEnemies.Count > maxEnemies - 2)
+            {
+                this.enabled = false;
+            }
         }
-        if (listEnemies.Count > maxEnemies - 2)
-        {
-            this.enabled = false;
-        }
+        
     }
     private void SpawnPlayer()
     {
@@ -45,7 +48,7 @@ public class LevelManager : Singleton<LevelManager>
         CameraFollow.Instance.FindPlayer();
     }
 
-    private void SpawnEnemies()
+    public void SpawnEnemies()
     {
         //this.gameObject.SetActive(false);
         for (int i = 0; i <= maxEnemiesOnGround; i++)

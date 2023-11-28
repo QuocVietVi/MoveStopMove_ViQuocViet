@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 441962415983771674}
   - component: {fileID: 3570776077884608447}
   - component: {fileID: 1614829248820198261}
+  - component: {fileID: 1017719019056274048}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1017719019056274048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966579389166328480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155ae35cfc52715409e6b180cc6bbd83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

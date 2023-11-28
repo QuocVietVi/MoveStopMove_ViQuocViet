@@ -39,7 +39,7 @@ public class Enemy : Character
         isDead = false;
         gravityScale = 9;
         collider.enabled = true;
-        ChangeState(new IdleState());
+        ChangeState(new PatrolState());
 
     }
 
