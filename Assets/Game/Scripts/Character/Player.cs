@@ -33,8 +33,7 @@ public class Player : Character
         {
             Move();
         }
-        Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
-        weaponData = GameManager.Instance.GetWeponData(weaponType);
+        //Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
 
     }
 

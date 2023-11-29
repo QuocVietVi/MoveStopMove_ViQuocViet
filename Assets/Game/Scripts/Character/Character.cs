@@ -22,17 +22,18 @@ public class Character : MonoBehaviour
 {
     [SerializeField] protected float gravityScale;
     [SerializeField] private Animator anim;
-    [SerializeField] protected GameObject weapon;
+    [SerializeField] protected Weapon currentWeapon;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private float bulletSpeed;
     [SerializeField] protected Collider collider;
+    [SerializeField] protected GameObject weaponOnHand;
     
     
     //[SerializeField] private Collider[] enemies;
     [SerializeField] private LayerMask enemyLayer;
     //[SerializeField] private GameObject targetPoint;
     public Transform throwPoint;
-    public float range;
+    private float range;
     public float level;
     public Transform target;
     public WeaponData weaponData;
@@ -47,15 +48,27 @@ public class Character : MonoBehaviour
     
     private string currentAnimName;
 
+    public float Range
+    {
+        get => range; set
+        {
+            range = value;
+        }
+    }
+
     private void Start()
     {
         level = 1;
+        weaponData = GameManager.Instance.GetWeponData(weaponType);
+        currentWeapon = weaponData.weapon;
+        Instantiate(currentWeapon,weaponOnHand.transform.position, weaponOnHand.transform.rotation,
+            weaponOnHand.transform);
+
     }
     private void Update()
     {
         rb.AddForce(Physics.gravity * gravityScale, ForceMode.Acceleration);
         AttackRange();
-        
 
     }
 
@@ -63,10 +76,10 @@ public class Character : MonoBehaviour
     {
         if (target != null)
         {
-            weapon.SetActive(false);
+            weaponOnHand.SetActive(false);
             Invoke(nameof(ActiveWeapon), 0.5f);
             this.transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
-            //bulletPrefab = weaponData.bullet;
+            bulletPrefab = weaponData.bullet;
             //Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);
             Bullet bullet = LeanPool.Spawn(bulletPrefab, throwPoint.position, throwPoint.rotation);
             bullet.rb.velocity = (target.position - this.transform.position) * bulletSpeed * Time.fixedDeltaTime;
@@ -83,14 +96,14 @@ public class Character : MonoBehaviour
 
     private void ActiveWeapon()
     {
-        weapon.SetActive(true);
+        weaponOnHand.gameObject.SetActive(true);
     }
 
     protected virtual void AttackRange()
     {
         int maxEnemyInRange = 2;
         enemyInRange = new Collider[maxEnemyInRange];
-        int numEnemies = Physics.OverlapSphereNonAlloc(this.transform.position, range, enemyInRange, enemyLayer);
+        int numEnemies = Physics.OverlapSphereNonAlloc(this.transform.position, Range, enemyInRange, enemyLayer);
         if (numEnemies > 0 )
         {
             target = enemyInRange[0].transform;
@@ -133,6 +146,6 @@ public class Character : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(this.transform.position, range);
+        Gizmos.DrawWireSphere(this.transform.position, Range);
     }
 }

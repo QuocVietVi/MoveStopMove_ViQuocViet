@@ -45,8 +45,8 @@ public class Bullet : MonoBehaviour
             if (attacker.level < 25)
             {
                 attacker.transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
-                attacker.range += 0.25f;
-                attacker.throwPoint.position -= Vector3.up * 0.05f;
+                attacker.Range += 0.25f;
+                attacker.throwPoint.position -= Vector3.up * 0.02f;
                 //CameraFollow.Instance.offset += new Vector3(0, 0.25f, -0.25f);
             }
             

@@ -40,12 +40,8 @@ public class CameraFollow : Singleton<CameraFollow>
         if (player != null)
         {
             camera.DOMove(player.transform.position + offset, speed * Time.fixedDeltaTime);
+        }
 
-        }
-        else
-        {
-            return;
-        }
 
     }
 

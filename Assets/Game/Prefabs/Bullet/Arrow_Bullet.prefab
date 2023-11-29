@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5024901984568610623}
   m_Layer: 0
   m_Name: Arrow_Bullet
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &-4425737565303712758
 BoxCollider:
@@ -59,7 +59,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2255954966928749506}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9908806, y: 0.11104861, z: 0.085153565}
