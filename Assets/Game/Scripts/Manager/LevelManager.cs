@@ -9,18 +9,18 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform startPoint;
     [SerializeField] private float maxEnemiesOnGround;
+    private float posX, posZ;
     public int characterLevel;
     public float maxEnemies;
     public List<Enemy> listEnemies = new List<Enemy>();
     public Player playerPrefab;
     public Enemy enemyPrefab;
-
-    private Transform spawnPoint;
-    private float posX, posZ;
+    private Player player;
+    
 
     private void Start()
     {
-
+        SpawnPlayer();
 
     }
 
@@ -41,11 +41,17 @@ public class LevelManager : Singleton<LevelManager>
         }
         
     }
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         //this.gameObject.SetActive(false);
-        Instantiate(playerPrefab, startPoint.position, Quaternion.identity);
+        //Instantiate(playerPrefab, startPoint.position, Quaternion.identity);
+        player = LeanPool.Spawn(playerPrefab, startPoint.position, playerPrefab.transform.rotation);
         CameraFollow.Instance.FindPlayer();
+    }
+
+    public void DeSpawnPlayer()
+    {
+        player.Despawn();
     }
 
     public void SpawnEnemies()

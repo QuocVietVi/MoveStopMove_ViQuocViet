@@ -20,34 +20,29 @@ public enum CharName
 [RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
-    [SerializeField] protected float gravityScale;
     [SerializeField] private Animator anim;
-    [SerializeField] protected Weapon currentWeapon;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] protected float gravityScale;
+    [SerializeField] protected Weapon currentWeapon;
     [SerializeField] protected Collider collider;
     [SerializeField] protected GameObject weaponOnHand;
+    [SerializeField] protected Rigidbody rb;
     
     
     //[SerializeField] private Collider[] enemies;
-    [SerializeField] private LayerMask enemyLayer;
     //[SerializeField] private GameObject targetPoint;
-    public Transform throwPoint;
     private float range;
+    private string currentAnimName;
+    protected Collider[] enemyInRange;
+    protected bool canAttack;
+    protected bool isDead;
+    public Transform throwPoint;
     public float level;
     public Transform target;
     public WeaponData weaponData;
     public WeaponType weaponType;
-    protected Rigidbody rb;
-    protected Collider[] enemyInRange;
-    protected bool canAttack;
-    protected bool isDead;
-    
-    //Collider[] enemyOutRange;
-
-    
-    private string currentAnimName;
-
     public float Range
     {
         get => range; set
@@ -55,14 +50,20 @@ public class Character : MonoBehaviour
             range = value;
         }
     }
+    
+    //Collider[] enemyOutRange;
+
+    
+
 
     private void Start()
     {
         level = 1;
+        isDead = false;
         weaponData = GameManager.Instance.GetWeponData(weaponType);
         currentWeapon = weaponData.weapon;
-        Instantiate(currentWeapon,weaponOnHand.transform.position, weaponOnHand.transform.rotation,
-            weaponOnHand.transform);
+        Instantiate(currentWeapon, weaponOnHand.transform);
+        this.Range = weaponData.range;
 
     }
     private void Update()
@@ -77,7 +78,7 @@ public class Character : MonoBehaviour
         if (target != null)
         {
             weaponOnHand.SetActive(false);
-            Invoke(nameof(ActiveWeapon), 0.5f);
+            Invoke(nameof(ActiveWeapon), weaponData.resetAttack);
             this.transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
             bulletPrefab = weaponData.bullet;
             //Bullet bullet = Instantiate(bulletPrefab, throwPoint.position, throwPoint.rotation);

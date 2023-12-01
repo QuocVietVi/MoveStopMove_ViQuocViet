@@ -17,9 +17,7 @@ public class Enemy : Character
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         ChangeState(new PatrolState());
-        isDead = false;
 
     }
 

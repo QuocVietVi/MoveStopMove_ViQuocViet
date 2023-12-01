@@ -1,3 +1,4 @@
+using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +12,17 @@ public class Player : Character
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private float rotateSpeed;
 
+    private Transform playerTf;
+
 
     private Vector3 moveVector;
     
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        joystick = FindObjectOfType<FloatingJoystick>();
-        isDead = false;
-        //if (weaponData == null)
-        //{
-        //    weaponData = GameManager.Instance.GetWeponData(weaponType);
-        //}
+
+        this.joystick = GameManager.Instance.floatingJoystick;
+        playerTf = this.transform;
 
     }
 
@@ -34,7 +33,11 @@ public class Player : Character
             Move();
         }
         //Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
+    }
 
+    public void Despawn()
+    {
+        LeanPool.Despawn(this);
     }
 
     private void Move()
@@ -46,8 +49,8 @@ public class Player : Character
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             ChangeAnim(ConstantAnim.RUN);
-            Vector3 direction = Vector3.RotateTowards(transform.forward, moveVector, rotateSpeed * Time.fixedDeltaTime, 0.0f);
-            transform.rotation = Quaternion.LookRotation(direction);
+            Vector3 direction = Vector3.RotateTowards(playerTf.forward, moveVector, rotateSpeed * Time.fixedDeltaTime, 0.0f);
+            playerTf.rotation = Quaternion.LookRotation(direction);
             canAttack = true;
 
 
@@ -59,7 +62,7 @@ public class Player : Character
             }
             if (canAttack == true && target != null)
             {
-                Invoke(nameof(Attack), 0.5f);
+                Invoke(nameof(Attack), weaponData.resetAttack);
             }
             canAttack = false;
         }
@@ -74,11 +77,11 @@ public class Player : Character
         if (isDead == false)
         {
             Enemy enemy = target.GetComponent<Enemy>();
-            if (enemyInRange[0] != this.GetComponent<Collider>())
+            if (enemyInRange[0] != this.collider)
             {
                 target = enemyInRange[0].transform;
             }
-            else if (enemyInRange[0] == this.GetComponent<Collider>() && enemyInRange[1] != null)
+            else if (enemyInRange[0] == this.collider && enemyInRange[1] != null)
             {
                 target = enemyInRange[1].transform;
             }
@@ -88,15 +91,15 @@ public class Player : Character
             }
             if (enemy != null)
             {
-                if (target != null)
-                {
-                    enemy.ActiveTargetPoint();
-                }
-                else
-                {
-                    enemy.DeActiveTargetPoint();
-                }
-                //.targetPoint.SetActive(true);
+                //if (target != null)
+                //{
+                //    enemy.ActiveTargetPoint();
+                //}
+                //else
+                //{
+                //    enemy.DeActiveTargetPoint();
+                //}
+                enemy.targetPoint.SetActive(true);
             }
             else
             {
@@ -131,6 +134,7 @@ public class Player : Character
         }
     }
 
+    
 
 
 

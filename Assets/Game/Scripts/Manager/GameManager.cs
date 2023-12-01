@@ -9,8 +9,9 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private WeaponSO weaponSO;
+    public WeaponSO weaponSO;
     private GameState gameState;
+    public FloatingJoystick floatingJoystick;
 
     private void Awake()
     {
