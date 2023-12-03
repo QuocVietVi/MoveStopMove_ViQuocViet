@@ -31,10 +31,10 @@ public class Enemy : Character
 
     }
     
-    public void OnInit()
+    public override void OnInit()
     {
+        base.OnInit();
         canAttack = true;
-        isDead = false;
         gravityScale = 9;
         collider.enabled = true;
         ChangeState(new PatrolState());
@@ -115,10 +115,6 @@ public class Enemy : Character
         }
         
 
-    }
-    private void Despawn()
-    {
-        LeanPool.Despawn(this);
     }
     protected override void OnDead()
     {

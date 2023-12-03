@@ -35,6 +35,7 @@ public class Character : MonoBehaviour
     //[SerializeField] private GameObject targetPoint;
     private float range;
     private string currentAnimName;
+    private Weapon w;
     protected Collider[] enemyInRange;
     protected bool canAttack;
     protected bool isDead;
@@ -59,20 +60,31 @@ public class Character : MonoBehaviour
     private void Start()
     {
         level = 1;
-        isDead = false;
-        weaponData = GameManager.Instance.GetWeponData(weaponType);
-        currentWeapon = weaponData.weapon;
-        Instantiate(currentWeapon, weaponOnHand.transform);
+
         this.Range = weaponData.range;
 
     }
+
+
     private void Update()
     {
         rb.AddForce(Physics.gravity * gravityScale, ForceMode.Acceleration);
         AttackRange();
 
     }
-
+    public virtual void OnInit()
+    {
+        isDead = false;
+        weaponData = GameManager.Instance.GetWeponData(weaponType);
+        currentWeapon = weaponData.weapon;
+        //Instantiate(currentWeapon, weaponOnHand.transform);
+        w = LeanPool.Spawn(currentWeapon, weaponOnHand.transform);
+    }
+    public void Despawn()
+    {
+        LeanPool.Despawn(this);
+        LeanPool.Despawn(w);
+    }
     public void Attack()
     {
         if (target != null)

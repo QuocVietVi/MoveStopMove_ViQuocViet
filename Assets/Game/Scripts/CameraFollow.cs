@@ -7,6 +7,7 @@ public class CameraFollow : Singleton<CameraFollow>
 {
     [SerializeField] private Player player;
     [SerializeField] private float speed;
+    [SerializeField] private Vector3 menuState;
     public Vector3 offset;
 
     private Transform camera;
@@ -14,9 +15,8 @@ public class CameraFollow : Singleton<CameraFollow>
 
     private void Awake()
     {
-        camera = this.transform;
-        offset = new Vector3(0f, 6f, -8.8f);
 
+        OnInit();
     }
 
     private void FixedUpdate()
@@ -33,6 +33,12 @@ public class CameraFollow : Singleton<CameraFollow>
         {
             offset = new Vector3(0, 21f, -25f);
         }
+    }
+
+    public void OnInit()
+    {
+        camera = this.transform;
+        offset = menuState;
     }
 
     private void Follow()

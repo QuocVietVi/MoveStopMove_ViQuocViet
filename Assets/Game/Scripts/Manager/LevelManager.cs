@@ -47,6 +47,8 @@ public class LevelManager : Singleton<LevelManager>
         //Instantiate(playerPrefab, startPoint.position, Quaternion.identity);
         player = LeanPool.Spawn(playerPrefab, startPoint.position, playerPrefab.transform.rotation);
         CameraFollow.Instance.FindPlayer();
+        player.weaponType = UIManager.Instance.currentWeapon;
+        player.OnInit();
     }
 
     public void DeSpawnPlayer()

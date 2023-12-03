@@ -8,13 +8,15 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private Text enemyAlive;
     [SerializeField] private float numberEnemiesAlive;
-    [SerializeField] private Button play,openWeaponShop, closeWeaponShop, prevWeapon, nextWeapon;
+    [SerializeField] private Button play,openWeaponShop, closeWeaponShop, prevWeapon, nextWeapon, buyBtn;
+    [SerializeField] private Text weaponName, weaponPrice;
     [SerializeField] private GameObject mainMenu, alive, weaponShop;
     [SerializeField] private GameObject weaponInShop;
-    [SerializeField]private WeaponType currentWeapon;
+    public WeaponType currentWeapon;
     private List<WeaponData> listWeapon;
     private int index;
     private Weapon weapon;
+    
     private void Start()
     {
         index = (int)currentWeapon;
@@ -23,11 +25,14 @@ public class UIManager : Singleton<UIManager>
         openWeaponShop.onClick.AddListener(OpenWShop);
         closeWeaponShop.onClick.AddListener(CloseWShop);
         nextWeapon.onClick.AddListener(NextWeapon);
+        prevWeapon.onClick.AddListener(PrevWeapon);
+        buyBtn.onClick.AddListener(BuyWeapon);
     }
 
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
+        
     }
 
     private void StartGamePlay()
@@ -45,7 +50,8 @@ public class UIManager : Singleton<UIManager>
         weaponShop.SetActive(true);
         LevelManager.Instance.DeSpawnPlayer();
         GameManager.Instance.GetWeponData(currentWeapon);
-        LeanPool.Spawn(weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+        weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+        SetWeaponInfo();
     }
 
     private void CloseWShop()
@@ -54,18 +60,44 @@ public class UIManager : Singleton<UIManager>
         weaponShop.SetActive(false);
         LevelManager.Instance.SpawnPlayer();
         LeanPool.Despawn(weapon);
-        
+        CameraFollow.Instance.OnInit();
     }
 
     private void NextWeapon()
     {
-        index++;
-        weapon = listWeapon[index].weapon;
-
-        LeanPool.Despawn(weapon);
+        if (index < listWeapon.Count-1)
+        {
+            index++;
+            LeanPool.Despawn(weapon);
+            weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+            SetWeaponInfo();
+        }
         //weapon = listWeapon[index].weapon;
-        LeanPool.Spawn(weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+        //LeanPool.Spawn(weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
     }
 
+    private void PrevWeapon()
+    {
+        if (index > 0)
+        {
+            index--;
+            LeanPool.Despawn(weapon);
+            weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+            SetWeaponInfo();
+        }
+
+    }
+
+    private void SetWeaponInfo()
+    {
+        weaponName.text = weapon.name;
+        weaponPrice.text = listWeapon[index].price.ToString();
+    }
+
+    private void BuyWeapon()
+    {
+        currentWeapon = listWeapon[index].weaponType;
+        CloseWShop();
+    }
 
 }

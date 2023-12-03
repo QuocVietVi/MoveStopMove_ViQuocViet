@@ -35,10 +35,12 @@ public class Player : Character
         //Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
     }
 
-    public void Despawn()
+    public override void OnInit()
     {
-        LeanPool.Despawn(this);
+        base.OnInit();
     }
+
+
 
     private void Move()
     {
