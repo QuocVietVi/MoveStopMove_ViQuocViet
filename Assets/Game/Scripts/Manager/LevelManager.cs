@@ -81,12 +81,17 @@ public class LevelManager : Singleton<LevelManager>
         player.ChangeAnim(ConstantAnim.DANCE);
     }
 
-    //public void ChangePant()
-    //{
-        
-    //    player.pantData = GameManager.Instance.GetPantData(player.pantSkin);
-    //}
+    public void ChangePant()
+    {
 
+        player.pantData = GameManager.Instance.GetPantData(player.pantSkin);
+    }
+
+    public void UnlockPant()
+    {
+        player.pantData.unlock = true;
+        player.pantData.isEqipped = true;
+    }
 
 
 }

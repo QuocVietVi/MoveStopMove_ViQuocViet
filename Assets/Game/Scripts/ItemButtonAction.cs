@@ -8,6 +8,7 @@ public class ItemButtonAction : MonoBehaviour
     [SerializeField] private Button button;
     public Outline outline;
     public Image image;
+    public Pant previewPant;
     public Pant currentPant;
     public Material material;
 
@@ -19,7 +20,7 @@ public class ItemButtonAction : MonoBehaviour
 
     private void ChangePant()
     {
-        LevelManager.Instance.player.pantSkin = currentPant;
+        //LevelManager.Instance.player.pantSkin = previewPant;
         LevelManager.Instance.player.pant.material = material;
         //LevelManager.Instance.ChangePant();
     }

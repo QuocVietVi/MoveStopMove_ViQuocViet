@@ -5466,7 +5466,7 @@ MonoBehaviour:
   shieldBtn: {fileID: 1817200824}
   setFullBtn: {fileID: 1978885323}
   closeBtn: {fileID: 974212351}
-  buyBtn: {fileID: 0}
+  buyBtn: {fileID: 683240285}
   pantImg: {fileID: 0}
   itemBtn: {fileID: 2937678200670822419, guid: 39e7c52a50816144a953c2ac3121b2fd, type: 3}
   btnHolder: {fileID: 1249192103}

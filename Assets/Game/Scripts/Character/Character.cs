@@ -80,6 +80,7 @@ public class Character : MonoBehaviour
         isDead = false;
         weaponData = GameManager.Instance.GetWeponData(weaponType);
         currentWeapon = weaponData.weapon;
+        LeanPool.Despawn(w);
         w = LeanPool.Spawn(currentWeapon, weaponOnHand.transform);
         pantData = GameManager.Instance.GetPantData(pantSkin);
         pant.material = pantData.material;
@@ -88,7 +89,7 @@ public class Character : MonoBehaviour
     public void Despawn()
     {
         LeanPool.Despawn(this);
-        LeanPool.Despawn(w);
+        //LeanPool.Despawn(w);
     }
     public void Attack()
     {

@@ -39,6 +39,7 @@ public class Player : Character
     {
         base.OnInit();
         this.moveSpeed = pantData.moveSpeed;
+        ChangeAnim(ConstantAnim.IDLE);
     }
 
 

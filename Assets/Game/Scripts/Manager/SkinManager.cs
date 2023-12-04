@@ -13,7 +13,7 @@ public class SkinManager : Singleton<SkinManager>
 
     private List<SkinData> listPants;
     private int index;
-    private bool canChoosePant;
+    private bool canChoosePant, buttonPressed;
 
     private void Start()
     {
@@ -32,8 +32,9 @@ public class SkinManager : Singleton<SkinManager>
             {
                 ItemButtonAction itemBtnAction = LeanPool.Spawn(itemBtn, btnHolder.transform);
                 itemBtnAction.image.sprite = listPants[i].image;
-                itemBtnAction.currentPant = listPants[i].pant;
+                itemBtnAction.currentPant = itemBtnAction.previewPant = listPants[i].pant;
                 itemBtnAction.material = listPants[i].material;
+                
             }
         }
         canChoosePant = false;
@@ -44,11 +45,14 @@ public class SkinManager : Singleton<SkinManager>
     {
         this.gameObject.SetActive(false);
         UIManager.Instance.subMenu.SetActive(true);
+        LevelManager.Instance.player.OnInit();
+        CameraFollow.Instance.OnInit();
+
     }
 
     private void BuyPant()
     {
-
+        LevelManager.Instance.UnlockPant();
     }
 
 }
