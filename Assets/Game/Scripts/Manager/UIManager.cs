@@ -8,11 +8,14 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private Text enemyAlive;
     [SerializeField] private float numberEnemiesAlive;
-    [SerializeField] private Button play,openWeaponShop, closeWeaponShop, prevWeapon, nextWeapon, buyBtn;
+    [SerializeField] private Button play,openWeaponShop, closeWeaponShop, prevWeapon, nextWeapon, buyBtn, openSkinShop;
     [SerializeField] private Text weaponName, weaponPrice;
-    [SerializeField] private GameObject mainMenu, alive, weaponShop;
+    [SerializeField] private GameObject mainMenu, alive, weaponShop, skinShop;
     [SerializeField] private GameObject weaponInShop;
+    [SerializeField] private Vector3 camOffset;
+
     public WeaponType currentWeapon;
+    public GameObject subMenu;
     private List<WeaponData> listWeapon;
     private int index;
     private Weapon weapon;
@@ -27,6 +30,7 @@ public class UIManager : Singleton<UIManager>
         nextWeapon.onClick.AddListener(NextWeapon);
         prevWeapon.onClick.AddListener(PrevWeapon);
         buyBtn.onClick.AddListener(BuyWeapon);
+        openSkinShop.onClick.AddListener(OpenSkinShop);
     }
 
     private void Update()
@@ -46,7 +50,7 @@ public class UIManager : Singleton<UIManager>
 
     private void OpenWShop()
     {
-        mainMenu.SetActive(false);
+        subMenu.SetActive(false);
         weaponShop.SetActive(true);
         LevelManager.Instance.DeSpawnPlayer();
         GameManager.Instance.GetWeponData(currentWeapon);
@@ -56,7 +60,7 @@ public class UIManager : Singleton<UIManager>
 
     private void CloseWShop()
     {
-        mainMenu.SetActive(true);
+        subMenu.SetActive(true);
         weaponShop.SetActive(false);
         LevelManager.Instance.SpawnPlayer();
         LeanPool.Despawn(weapon);
@@ -98,6 +102,14 @@ public class UIManager : Singleton<UIManager>
     {
         currentWeapon = listWeapon[index].weaponType;
         CloseWShop();
+    }
+
+    private void OpenSkinShop()
+    {
+        subMenu.SetActive(false);
+        skinShop.SetActive(true);
+        CameraFollow.Instance.offset = camOffset;
+        LevelManager.Instance.DanceAnim();
     }
 
 }

@@ -15,7 +15,7 @@ public class LevelManager : Singleton<LevelManager>
     public List<Enemy> listEnemies = new List<Enemy>();
     public Player playerPrefab;
     public Enemy enemyPrefab;
-    private Player player;
+    public Player player;
     
 
     private void Start()
@@ -75,5 +75,18 @@ public class LevelManager : Singleton<LevelManager>
         enemy.OnInit();
         listEnemies.Add(enemy);
     }
+
+    public void DanceAnim()
+    {
+        player.ChangeAnim(ConstantAnim.DANCE);
+    }
+
+    //public void ChangePant()
+    //{
+        
+    //    player.pantData = GameManager.Instance.GetPantData(player.pantSkin);
+    //}
+
+
 
 }

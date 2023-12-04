@@ -38,6 +38,7 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        this.moveSpeed = pantData.moveSpeed;
     }
 
 

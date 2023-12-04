@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected Collider collider;
     [SerializeField] protected GameObject weaponOnHand;
     [SerializeField] protected Rigidbody rb;
+    public SkinnedMeshRenderer pant;
     
     
     //[SerializeField] private Collider[] enemies;
@@ -44,6 +45,8 @@ public class Character : MonoBehaviour
     public Transform target;
     public WeaponData weaponData;
     public WeaponType weaponType;
+    public SkinData pantData;
+    public Pant pantSkin;
     public float Range
     {
         get => range; set
@@ -77,8 +80,10 @@ public class Character : MonoBehaviour
         isDead = false;
         weaponData = GameManager.Instance.GetWeponData(weaponType);
         currentWeapon = weaponData.weapon;
-        //Instantiate(currentWeapon, weaponOnHand.transform);
         w = LeanPool.Spawn(currentWeapon, weaponOnHand.transform);
+        pantData = GameManager.Instance.GetPantData(pantSkin);
+        pant.material = pantData.material;
+
     }
     public void Despawn()
     {
@@ -147,7 +152,7 @@ public class Character : MonoBehaviour
 
 
 
-    protected void ChangeAnim(string animName)
+    public void ChangeAnim(string animName)
     {
         if (currentAnimName != animName)
         {
