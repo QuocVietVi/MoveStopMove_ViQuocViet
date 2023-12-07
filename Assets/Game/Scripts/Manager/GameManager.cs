@@ -9,13 +9,18 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    private GameState gameState;
+    private  PlayerData playerData;
     public WeaponSO weaponSO;
     public SkinSO skinSO;
-    private GameState gameState;
+    public HatSO hatSO;
     public FloatingJoystick floatingJoystick;
+    public PlayerData PlayerData { get => playerData; set => playerData = value; }
+
 
     private void Awake()
     {
+        GetPlayerData();
         ChangeState(GameState.MainMenu);
     }
 
@@ -32,7 +37,7 @@ public class GameManager : Singleton<GameManager>
         return weaponSO.weapons[(int)weaponType];
     }
 
-    public SkinData GetPantData(Pant pant)
+    public SkinData GetPantData(PantType pant)
     {
         List<SkinData> pantData = skinSO.pants;
         for (int i = 0; i < pantData.Count; i++)
@@ -43,6 +48,34 @@ public class GameManager : Singleton<GameManager>
             }
         }
         return null;
+    }
+
+    public HatData GetHatData(HatType hat)
+    {
+        List<HatData> hatData = hatSO.hats;
+        for (int i = 0; i < hatData.Count; i++)
+        {
+            if (hat == hatData[i].hatType)
+            {
+                return hatData[i];
+            }
+        }
+        return null;
+    }
+
+    public void GetPlayerData()
+    {
+        if (DataManager.Instance.HasData<PlayerData>())
+        {
+            PlayerData = DataManager.Instance.LoadData<PlayerData>();
+            Debug.Log("Loaded User Data.");
+        }
+        else
+        {
+            PlayerData = new PlayerData();
+            DataManager.Instance.SaveData(PlayerData);
+            Debug.Log("Creating New User Data");
+        }
     }
 
 

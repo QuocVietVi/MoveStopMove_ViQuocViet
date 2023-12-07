@@ -38,7 +38,10 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
-        this.moveSpeed = pantData.moveSpeed;
+        this.moveSpeed = 10;
+        this.Range = 5;
+        this.moveSpeed += pantData.moveSpeed;
+        this.Range += weaponData.range + hatData.range;
         ChangeAnim(ConstantAnim.IDLE);
     }
 
@@ -132,7 +135,7 @@ public class Player : Character
                 return;
             }
             else {
-                //OnDead();
+                OnDead();
                 bullet.OnDespawn();
             }
         }

@@ -18,6 +18,7 @@ public class Enemy : Character
     private void Awake()
     {
         ChangeState(new PatrolState());
+        Range = 5;
 
     }
 
@@ -37,6 +38,11 @@ public class Enemy : Character
         canAttack = true;
         gravityScale = 9;
         collider.enabled = true;
+        
+        if (this.Range + weaponData.range > this.Range)
+        {
+            this.Range += weaponData.range;
+        }
         ChangeState(new PatrolState());
 
     }

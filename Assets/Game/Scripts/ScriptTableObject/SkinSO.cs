@@ -7,3 +7,6 @@ public class SkinSO : ScriptableObject
 {
     public List<SkinData> pants;
 }
+
+
+

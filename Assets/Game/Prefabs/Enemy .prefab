@@ -158,16 +158,36 @@ MonoBehaviour:
   collider: {fileID: 1621629007152972350}
   weaponOnHand: {fileID: 8909234861324742276}
   rb: {fileID: 1621629007152972337}
+  pant: {fileID: 7937265920173053361}
   throwPoint: {fileID: 1621629009123663661}
   level: 0
   target: {fileID: 0}
   weaponData:
+    bullet: {fileID: 0}
+    weapon: {fileID: 0}
     weaponType: 0
     range: 0
     speed: 0
-    bullet: {fileID: 0}
-    weapon: {fileID: 0}
+    resetAttack: 0
+    price: 0
   weaponType: 1
+  pantData:
+    pant: 0
+    moveSpeed: 0
+    image: {fileID: 0}
+    material: {fileID: 0}
+    unlock: 0
+    isEqipped: 0
+  pantSkin: 0
+  hatData:
+    hatType: 0
+    range: 0
+    image: {fileID: 0}
+    hatPrefab: {fileID: 0}
+    unlock: 0
+    isEqipped: 0
+  hatType: 0
+  hatHolder: {fileID: 0}
   agent: {fileID: 1621629007152972338}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
@@ -862,5 +882,10 @@ Animator:
 --- !u!4 &6051600068872744226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1621629007851816504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7937265920173053361 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 1621629007851816504}
   m_PrefabAsset: {fileID: 0}

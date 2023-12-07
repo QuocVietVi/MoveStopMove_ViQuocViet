@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26960954, g: 0.6698113, b: 0.6698112, a: 1}
+  m_Color: {r: 0.12941177, g: 0.40784314, b: 0.40784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -230,4 +230,5 @@ MonoBehaviour:
   button: {fileID: 2294617593859853876}
   outline: {fileID: 2294617593859853877}
   image: {fileID: 2294617593314185393}
-  currentPant: 0
+  previewPant: 0
+  material: {fileID: 0}

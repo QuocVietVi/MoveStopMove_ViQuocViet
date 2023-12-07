@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Text weaponName, weaponPrice;
     [SerializeField] private GameObject mainMenu, alive, weaponShop, skinShop;
     [SerializeField] private GameObject weaponInShop;
+    [SerializeField] private GameObject imageGold;
     [SerializeField] private Vector3 camOffset;
 
     public WeaponType currentWeapon;
@@ -19,11 +20,14 @@ public class UIManager : Singleton<UIManager>
     private List<WeaponData> listWeapon;
     private int index;
     private Weapon weapon;
+    private PlayerData playerData;
     
     private void Start()
     {
         index = (int)currentWeapon;
         listWeapon = GameManager.Instance.weaponSO.weapons;
+        playerData = GameManager.Instance.PlayerData;
+        //currentWeapon = (WeaponType)playerData.weaponEquppied;
         play.onClick.AddListener(StartGamePlay);
         openWeaponShop.onClick.AddListener(OpenWShop);
         closeWeaponShop.onClick.AddListener(CloseWShop);
@@ -36,9 +40,12 @@ public class UIManager : Singleton<UIManager>
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
-        
-    }
 
+    }
+    //private void OnInit()
+    //{
+
+    //}
     private void StartGamePlay()
     {
         mainMenu.SetActive(false);
@@ -55,6 +62,8 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.DeSpawnPlayer();
         GameManager.Instance.GetWeponData(currentWeapon);
         weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+        //OnInit();
+        //DataManager.Instance.LoadData<PlayerData>();
         SetWeaponInfo();
     }
 
@@ -74,6 +83,7 @@ public class UIManager : Singleton<UIManager>
             index++;
             LeanPool.Despawn(weapon);
             weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+            currentWeapon = listWeapon[index].weaponType;
             SetWeaponInfo();
         }
         //weapon = listWeapon[index].weapon;
@@ -87,6 +97,7 @@ public class UIManager : Singleton<UIManager>
             index--;
             LeanPool.Despawn(weapon);
             weapon = LeanPool.Spawn(listWeapon[index].weapon, weaponInShop.transform.position, Quaternion.identity, weaponInShop.transform);
+            currentWeapon = listWeapon[index].weaponType;
             SetWeaponInfo();
         }
 
@@ -95,13 +106,36 @@ public class UIManager : Singleton<UIManager>
     private void SetWeaponInfo()
     {
         weaponName.text = weapon.name;
-        weaponPrice.text = listWeapon[index].price.ToString();
+        if (playerData.listWeaponUnlock.Contains((int)currentWeapon))
+        {
+            weaponPrice.text = "Eqipped";
+            imageGold.SetActive(false);
+            if ((int)currentWeapon != playerData.weaponEquppied)
+            {
+                weaponPrice.text = "Select";
+            }
+        }
+        else
+        {
+            weaponPrice.text = listWeapon[index].price.ToString();
+            imageGold.SetActive(true);
+
+        }
     }
 
     private void BuyWeapon()
     {
         currentWeapon = listWeapon[index].weaponType;
-        CloseWShop();
+        Debug.Log(currentWeapon.ToString());
+        if (weaponPrice.text != "Eqipped".ToString())
+        {
+            playerData.listWeaponUnlock.Add((int)currentWeapon);
+        }
+        playerData.weaponEquppied = (int)currentWeapon;
+        DataManager.Instance.SaveData(playerData);
+        SetWeaponInfo();
+
+        //CloseWShop();
     }
 
     private void OpenSkinShop()

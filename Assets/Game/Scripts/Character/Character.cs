@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
     private float range;
     private string currentAnimName;
     private Weapon w;
+    private GameObject hat;
     protected Collider[] enemyInRange;
     protected bool canAttack;
     protected bool isDead;
@@ -46,7 +47,10 @@ public class Character : MonoBehaviour
     public WeaponData weaponData;
     public WeaponType weaponType;
     public SkinData pantData;
-    public Pant pantSkin;
+    public PantType pantSkin;
+    public HatData hatData;
+    public HatType hatType;
+    public Transform hatHolder;
     public float Range
     {
         get => range; set
@@ -63,8 +67,8 @@ public class Character : MonoBehaviour
     private void Start()
     {
         level = 1;
-
-        this.Range = weaponData.range;
+        OnInit();
+        
 
     }
 
@@ -78,12 +82,19 @@ public class Character : MonoBehaviour
     public virtual void OnInit()
     {
         isDead = false;
-        weaponData = GameManager.Instance.GetWeponData(weaponType);
+        weaponData = GameManager.Instance.GetWeponData((WeaponType)GameManager.Instance.PlayerData.weaponEquppied);
         currentWeapon = weaponData.weapon;
+        bulletSpeed = weaponData.speed;
         LeanPool.Despawn(w);
         w = LeanPool.Spawn(currentWeapon, weaponOnHand.transform);
         pantData = GameManager.Instance.GetPantData(pantSkin);
         pant.material = pantData.material;
+        hatData = GameManager.Instance.GetHatData(hatType);
+        LeanPool.Despawn(hat);
+        if (hatData.hatPrefab != null)
+        {
+            hat = LeanPool.Spawn(hatData.hatPrefab);
+        }
 
     }
     public void Despawn()

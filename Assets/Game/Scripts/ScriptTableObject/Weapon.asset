@@ -16,35 +16,35 @@ MonoBehaviour:
   - bullet: {fileID: 3172990705057392822, guid: 2c1e1ff9ad650334b8e07fef08ae4b32, type: 3}
     weapon: {fileID: -6004606561346733169, guid: 51b67d2dd8b6b6a41bc0fd428740ebfc, type: 3}
     weaponType: 0
-    range: 5
+    range: 0
     speed: 80
     resetAttack: 0.58
     price: 200
   - bullet: {fileID: 3619482852350952023, guid: 932b10937df991a4081259350fafda5b, type: 3}
     weapon: {fileID: -7810081261239955538, guid: 4321eb9e58cb34540a6a2f53d6cb4cd8, type: 3}
     weaponType: 1
-    range: 5
+    range: 0.2
     speed: 85
     resetAttack: 0.56
     price: 400
   - bullet: {fileID: -5024901984568610623, guid: 99131a3b793c4a940923e7342ac91e08, type: 3}
     weapon: {fileID: 3308557418560275451, guid: 99780811b1c8f94409433efaabede135, type: 3}
     weaponType: 2
-    range: 5
+    range: 0.3
     speed: 90
     resetAttack: 0.54
     price: 600
   - bullet: {fileID: 3436020090509480641, guid: 32d84cbdad65f334098f42253dbb14e6, type: 3}
     weapon: {fileID: 6513955945802564623, guid: ec8ab3af22f895b409451f7dfd573fdf, type: 3}
     weaponType: 3
-    range: 5
+    range: 0.4
     speed: 95
     resetAttack: 0.52
     price: 800
   - bullet: {fileID: 2610206814065835445, guid: ac5709448b061984c8096e623da2625b, type: 3}
     weapon: {fileID: 1017719019056274048, guid: 0470a0a389eb2b24fb6aadf57a2bdfdf, type: 3}
     weaponType: 4
-    range: 5
+    range: 0.5
     speed: 85
     resetAttack: 0.56
     price: 1000
