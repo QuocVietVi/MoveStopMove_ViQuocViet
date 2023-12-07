@@ -2291,7 +2291,7 @@ GameObject:
   - component: {fileID: 602481842}
   - component: {fileID: 602481841}
   m_Layer: 5
-  m_Name: Weapon Price
+  m_Name: Skin Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2350,7 +2350,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 200
+  m_Text: 0
 --- !u!222 &602481842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4107,6 +4107,7 @@ MonoBehaviour:
     material: {fileID: 0}
     unlock: 0
     isEqipped: 0
+    price: 0
   pantSkin: 0
   hatData:
     hatType: 0
@@ -4115,6 +4116,7 @@ MonoBehaviour:
     hatPrefab: {fileID: 0}
     unlock: 0
     isEqipped: 0
+    price: 0
   hatType: 0
   hatHolder: {fileID: 0}
   agent: {fileID: 993954244}
@@ -5518,6 +5520,7 @@ MonoBehaviour:
   currentPant: 0
   currentHat: 0
   hats: []
+  skinPrice: {fileID: 602481841}
 --- !u!1 &1459542972
 GameObject:
   m_ObjectHideFlags: 0

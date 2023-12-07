@@ -19,57 +19,67 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: b0285ac7651728342ad46af0c73128ee, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 0
   - pant: 1
     moveSpeed: 2
     image: {fileID: 21300000, guid: b33b4317bc1cb3546b8e00db33359857, type: 3}
     material: {fileID: 2100000, guid: dc961289590b69f46844a52749439d14, type: 2}
     unlock: 1
     isEqipped: 1
+    price: 400
   - pant: 2
     moveSpeed: 2
     image: {fileID: 21300000, guid: 562ae402bbf77ee4696c4cc47b8a6501, type: 3}
     material: {fileID: 2100000, guid: ffddf97586c95de4ea5e2ae033f3c387, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 500
   - pant: 3
     moveSpeed: 2
     image: {fileID: 21300000, guid: 1ead75be8bb7c6e4d925bfb8ebc70ef2, type: 3}
     material: {fileID: 2100000, guid: 26f934ba670e6c94b9d412854f47ef81, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 600
   - pant: 4
     moveSpeed: 2
     image: {fileID: 21300000, guid: fd38ccda5a00e474a8f29e4086ed24b8, type: 3}
     material: {fileID: 2100000, guid: f4c3703a3b446d54aaeff9bf1ef33c06, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 700
   - pant: 5
     moveSpeed: 2
     image: {fileID: 21300000, guid: e750b36d30a7bb644b65162b509774c5, type: 3}
     material: {fileID: 2100000, guid: adde5440da324ae469cb16509dd0c966, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 800
   - pant: 6
     moveSpeed: 2
     image: {fileID: 21300000, guid: ea49cd12951fdbc43a74f1ba74ec03f5, type: 3}
     material: {fileID: 2100000, guid: 2e29d2c36ea86ee448a61f0ee4b5d96b, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 900
   - pant: 7
     moveSpeed: 2
     image: {fileID: 21300000, guid: dbfea47ef6fcf0d47a49044a190da6f9, type: 3}
     material: {fileID: 2100000, guid: 8d05a24b7021ec3419499971eeb279c8, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 1000
   - pant: 8
     moveSpeed: 2
     image: {fileID: 21300000, guid: ecb4093850e3b1d4fb2483eec6de2ab2, type: 3}
     material: {fileID: 2100000, guid: 14afddc0824a782408d38a962e52a3bc, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 1000
   - pant: 9
     moveSpeed: 2
     image: {fileID: 21300000, guid: bbcdbd88c82e30f48a822e42da2fa4b9, type: 3}
     material: {fileID: 2100000, guid: b8d3d3d769019924f9847018f683deca, type: 2}
     unlock: 0
     isEqipped: 0
+    price: 1000

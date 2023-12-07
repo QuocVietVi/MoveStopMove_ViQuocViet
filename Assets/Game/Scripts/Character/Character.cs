@@ -82,18 +82,18 @@ public class Character : MonoBehaviour
     public virtual void OnInit()
     {
         isDead = false;
-        weaponData = GameManager.Instance.GetWeponData((WeaponType)GameManager.Instance.PlayerData.weaponEquppied);
+        weaponData = GameManager.Instance.GetWeponData((WeaponType)GameManager.Instance.PlayerData.weaponEquipped);
         currentWeapon = weaponData.weapon;
         bulletSpeed = weaponData.speed;
         LeanPool.Despawn(w);
         w = LeanPool.Spawn(currentWeapon, weaponOnHand.transform);
-        pantData = GameManager.Instance.GetPantData(pantSkin);
+        pantData = GameManager.Instance.GetPantData((PantType)GameManager.Instance.PlayerData.pantEqipped);
         pant.material = pantData.material;
-        hatData = GameManager.Instance.GetHatData(hatType);
+        hatData = GameManager.Instance.GetHatData((HatType)GameManager.Instance.PlayerData.hatEqipped);
         LeanPool.Despawn(hat);
         if (hatData.hatPrefab != null)
         {
-            hat = LeanPool.Spawn(hatData.hatPrefab);
+            hat = LeanPool.Spawn(hatData.hatPrefab,hatHolder);
         }
 
     }

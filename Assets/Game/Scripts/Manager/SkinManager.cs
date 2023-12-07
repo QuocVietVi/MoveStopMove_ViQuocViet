@@ -16,20 +16,23 @@ public class SkinManager : Singleton<SkinManager>
     private int index;
     private ItemButtonAction itemBtnAction;
     private List<ItemButtonAction> listItems = new List<ItemButtonAction>();
+    private PlayerData playerData;
     public bool canChoosePant, canChooseHat, canChooseShield;
     public PantType currentPant;
     public HatType currentHat;
     public List<GameObject> hats;
+    public Text skinPrice;
     private void Start()
     {
         //index = (int)currentPant;
+        playerData = GameManager.Instance.PlayerData;
         listPants = GameManager.Instance.skinSO.pants;
         listHats = GameManager.Instance.hatSO.hats;
         canChoosePant = true;
         canChooseHat = true;
         pantBtn.onClick.AddListener(SpawnPantItem);
         closeBtn.onClick.AddListener(CloseSkinShop);
-        buyBtn.onClick.AddListener(BuyPant);
+        buyBtn.onClick.AddListener(BuySkin);
         hatBtn.onClick.AddListener(SpawnHatItem);
     }
 
@@ -44,6 +47,7 @@ public class SkinManager : Singleton<SkinManager>
                 itemBtnAction.image.sprite = listPants[i].image;
                 itemBtnAction.previewPant = listPants[i].pant;
                 itemBtnAction.material = listPants[i].material;
+                itemBtnAction.price = listPants[i].price;
                 listItems.Add(itemBtnAction);
             }
         }
@@ -63,6 +67,7 @@ public class SkinManager : Singleton<SkinManager>
                 itemBtnAction.image.sprite = listHats[i].image;
                 itemBtnAction.previewHat = listHats[i].hatType;
                 itemBtnAction.hatPrefab = listHats[i].hatPrefab;
+                itemBtnAction.price = listHats[i].price;
                 listItems.Add(itemBtnAction);
 
             }
@@ -81,9 +86,41 @@ public class SkinManager : Singleton<SkinManager>
         DespawnHat();
     }
 
-    private void BuyPant()
+    private void BuySkin()
     {
-        LevelManager.Instance.UnlockPant();
+        if (canChoosePant == false)
+        {
+            if (skinPrice.text != "Equipped" && skinPrice.text != "Select")
+            {
+                playerData.listPantUnlock.Add((int)currentPant);
+            }
+            playerData.pantEqipped = (int)currentPant;
+            DataManager.Instance.SaveData(playerData);
+            SetTextBtnBuy();
+        }
+        if (canChooseHat == false)
+        {
+            if (skinPrice.text != "Equipped" && skinPrice.text != "Select")
+            {
+                playerData.listHatUnlock.Add((int)currentHat);
+            }
+            playerData.hatEqipped = (int)currentHat;
+            DataManager.Instance.SaveData(playerData);
+            SetTextBtnBuy();
+        }
+
+    }
+
+    public void SetTextBtnBuy()
+    {
+        //if (playerData.listPantUnlock.Contains((int)currentPant))
+        //{
+        skinPrice.text = "Equipped";
+        if ((int)currentPant != playerData.pantEqipped && canChoosePant == false)
+        {
+            skinPrice.text = "Select";
+        }
+        //}
     }
 
     private void DespawnItem() {

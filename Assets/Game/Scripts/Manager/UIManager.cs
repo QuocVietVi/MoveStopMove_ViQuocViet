@@ -110,7 +110,7 @@ public class UIManager : Singleton<UIManager>
         {
             weaponPrice.text = "Eqipped";
             imageGold.SetActive(false);
-            if ((int)currentWeapon != playerData.weaponEquppied)
+            if ((int)currentWeapon != playerData.weaponEquipped)
             {
                 weaponPrice.text = "Select";
             }
@@ -127,11 +127,11 @@ public class UIManager : Singleton<UIManager>
     {
         currentWeapon = listWeapon[index].weaponType;
         Debug.Log(currentWeapon.ToString());
-        if (weaponPrice.text != "Eqipped".ToString())
+        if (weaponPrice.text != "Eqipped" && weaponPrice.text != "Select")
         {
             playerData.listWeaponUnlock.Add((int)currentWeapon);
         }
-        playerData.weaponEquppied = (int)currentWeapon;
+        playerData.weaponEquipped = (int)currentWeapon;
         DataManager.Instance.SaveData(playerData);
         SetWeaponInfo();
 

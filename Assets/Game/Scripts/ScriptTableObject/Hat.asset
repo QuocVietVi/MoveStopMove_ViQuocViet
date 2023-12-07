@@ -19,51 +19,60 @@ MonoBehaviour:
     hatPrefab: {fileID: 0}
     unlock: 0
     isEqipped: 0
+    price: 0
   - hatType: 1
     range: 0.2
     image: {fileID: 21300000, guid: 28e036965bf813e4e90b9c4a800d3f62, type: 3}
     hatPrefab: {fileID: 1412899391298371478, guid: 5dfb5b2aa44ffa14a936124459fb4d0c, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 500
   - hatType: 2
     range: 0.2
     image: {fileID: 21300000, guid: 38e7afe0e2926ee4a8e344cfaa353dc3, type: 3}
     hatPrefab: {fileID: 2202276265544861337, guid: 14874773a886a094780d87509941ac6d, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 600
   - hatType: 3
     range: 0.2
     image: {fileID: 21300000, guid: 1bd33774c2d64944595b841894856e2a, type: 3}
     hatPrefab: {fileID: 4833398740637401548, guid: f7356257d8cfe5242a767b6d979c355f, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 700
   - hatType: 4
     range: 0.2
     image: {fileID: 21300000, guid: 50b453a6e5009514ab58cd355d607556, type: 3}
     hatPrefab: {fileID: 2108917591472040320, guid: 740cc8131400cd543946b58911f7a48d, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 800
   - hatType: 5
     range: 0.2
     image: {fileID: 21300000, guid: ab12f5891c722a140b6ce14090669c39, type: 3}
     hatPrefab: {fileID: 980736703910535002, guid: 03ccf1bb71e86d94fb809c016389478a, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 900
   - hatType: 6
     range: 0.2
     image: {fileID: 21300000, guid: 289d185a870bf3f40a2b83fbc2b1a118, type: 3}
     hatPrefab: {fileID: 8814266991819115035, guid: 0bc36e69ade4a7a4db7290acea6c0ec8, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 900
   - hatType: 7
     range: 0.2
     image: {fileID: 21300000, guid: cb13574ac39bf4248849eb0ca56767da, type: 3}
     hatPrefab: {fileID: 7023700828121510566, guid: 46d3c437f9eb5b24d93f63243d52c1b3, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 900
   - hatType: 8
     range: 0.2
     image: {fileID: 21300000, guid: e1ba2c4fba130a44ea8ac80866ff3ed3, type: 3}
     hatPrefab: {fileID: 7913518149662563563, guid: 77c49a92033f60148840521b1a1de748, type: 3}
     unlock: 0
     isEqipped: 0
+    price: 900

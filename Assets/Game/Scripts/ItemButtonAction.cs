@@ -17,14 +17,25 @@ public class ItemButtonAction : MonoBehaviour
     public HatType previewHat;
     public Material material;
     public GameObject hatPrefab;
+    public float price;
     
 
     private void Start()
     {
-        button.onClick.AddListener(ChangeSkin);
+        button.onClick.AddListener(() =>
+        {
+            if (SkinManager.Instance.canChoosePant == false )
+            {
+                ChangePant();
+            }
+            if (SkinManager.Instance.canChooseHat == false)
+            {
+                ChangeHat();
+            }
+        });
     }
 
-    private void ChangeSkin()
+    private void ChangePant()
     {
         //LevelManager.Instance.player.pantSkin = previewPant;
         if (!SkinManager.Instance.canChoosePant)
@@ -32,15 +43,53 @@ public class ItemButtonAction : MonoBehaviour
             LevelManager.Instance.player.pant.material = material;
             SkinManager.Instance.currentPant = this.previewPant;
         }
+        //if (!SkinManager.Instance.canChooseHat)
+        //{
+        //    //LeanPool.Despawn(hat);
+        //    SkinManager.Instance.currentHat = this.previewHat;
+        //    SkinManager.Instance.DespawnHat();
+        //    hat = LeanPool.Spawn(hatPrefab, LevelManager.Instance.player.hatHolder);
+        //    SkinManager.Instance.hats.Add(hat);
+        //}
+        if (GameManager.Instance.PlayerData.listPantUnlock.Contains((int)SkinManager.Instance.currentPant)             )
+        {
+            SkinManager.Instance.SetTextBtnBuy();
+        }
+        else
+        {
+            SkinManager.Instance.skinPrice.text = this.price.ToString();
+        }
+        //if (GameManager.Instance.PlayerData.listHatUnlock.Contains((int)SkinManager.Instance.currentHat))
+        //{
+        //    SkinManager.Instance.SetTextBtnBuy();
+        //    Debug.Log("hat");
+        //}
+        //else
+        //{
+        //    SkinManager.Instance.skinPrice.text = this.price.ToString();
+        //}
+
+    }
+
+    private void ChangeHat()
+    {
         if (!SkinManager.Instance.canChooseHat)
         {
             //LeanPool.Despawn(hat);
+            SkinManager.Instance.currentHat = this.previewHat;
             SkinManager.Instance.DespawnHat();
             hat = LeanPool.Spawn(hatPrefab, LevelManager.Instance.player.hatHolder);
             SkinManager.Instance.hats.Add(hat);
         }
-
-        //LevelManager.Instance.ChangePant();
+        if (GameManager.Instance.PlayerData.listHatUnlock.Contains((int)SkinManager.Instance.currentHat))
+        {
+            SkinManager.Instance.SetTextBtnBuy();
+            Debug.Log("hat");
+        }
+        else
+        {
+            SkinManager.Instance.skinPrice.text = this.price.ToString();
+        }
     }
 
     //private void DespawnHat()

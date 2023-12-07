@@ -39,6 +39,7 @@ public class SkinData
     public Material material;
     public bool unlock;
     public bool isEqipped;
+    public float price;
 }
 
 
@@ -51,5 +52,6 @@ public class HatData
     public GameObject hatPrefab;
     public bool unlock;
     public bool isEqipped;
+    public float price;
 }
 
