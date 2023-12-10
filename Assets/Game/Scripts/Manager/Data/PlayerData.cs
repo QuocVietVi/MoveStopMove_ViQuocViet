@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerData 
 {
-    public int golds;
+    public float golds;
     public int weaponEquipped;
     public int pantEqipped;
     public int hatEqipped;
@@ -26,7 +26,7 @@ public class PlayerData
         listShieldUnlock = new List<int>(0);
     }
 
-    public PlayerData(int golds, int weaponEquppied,int pantEqipped, int hatEqipped, int shieldEqipped, 
+    public PlayerData(float golds, int weaponEquppied,int pantEqipped, int hatEqipped, int shieldEqipped, 
         List<int> listWeaponUnlock, List<int> listPantUnlock, List<int> listHatUnlock, List<int> listShieldUnlock)
     {
         this.golds = golds;

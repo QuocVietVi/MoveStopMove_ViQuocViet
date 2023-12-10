@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public WeaponSO weaponSO;
     public SkinSO skinSO;
     public HatSO hatSO;
+    public ShieldSO shieldSO;
     public FloatingJoystick floatingJoystick;
     public PlayerData PlayerData { get => playerData; set => playerData = value; }
 
@@ -61,6 +62,11 @@ public class GameManager : Singleton<GameManager>
             }
         }
         return null;
+    }
+
+    public ShieldData GetShieldData(ShieldType shield)
+    {
+        return shieldSO.shields[(int)shield];
     }
 
     public void GetPlayerData()

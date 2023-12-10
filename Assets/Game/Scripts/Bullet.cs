@@ -49,6 +49,10 @@ public class Bullet : MonoBehaviour
                 attacker.throwPoint.position -= Vector3.up * 0.02f;
                 //CameraFollow.Instance.offset += new Vector3(0, 0.25f, -0.25f);
             }
+            if (attacker == LevelManager.Instance.player)
+            {
+                LevelManager.Instance.player.gold++;
+            }
             
             //OnDespawn();
             //Destroy(gameObject);

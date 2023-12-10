@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
     private string currentAnimName;
     private Weapon w;
     private GameObject hat;
+    private GameObject shield;
     protected Collider[] enemyInRange;
     protected bool canAttack;
     protected bool isDead;
@@ -51,6 +52,8 @@ public class Character : MonoBehaviour
     public HatData hatData;
     public HatType hatType;
     public Transform hatHolder;
+    public ShieldData shieldData;
+    public Transform shieldHolder;
     public float Range
     {
         get => range; set
@@ -90,17 +93,40 @@ public class Character : MonoBehaviour
         pantData = GameManager.Instance.GetPantData((PantType)GameManager.Instance.PlayerData.pantEqipped);
         pant.material = pantData.material;
         hatData = GameManager.Instance.GetHatData((HatType)GameManager.Instance.PlayerData.hatEqipped);
-        LeanPool.Despawn(hat);
+        DespawnHat();
         if (hatData.hatPrefab != null)
         {
             hat = LeanPool.Spawn(hatData.hatPrefab,hatHolder);
         }
+        shieldData = GameManager.Instance.GetShieldData((ShieldType)GameManager.Instance.PlayerData.shieldEqipped);
+        DespawnShield();
+        if (shieldData.shieldPrefab != null)
+        {
+            shield = LeanPool.Spawn(shieldData.shieldPrefab,shieldHolder);
+        }
+
 
     }
     public void Despawn()
     {
         LeanPool.Despawn(this);
         //LeanPool.Despawn(w);
+    }
+
+    public void DespawnHat()
+    {
+        if (hat != null)
+        {
+            LeanPool.Despawn(hat);
+        }
+    }
+
+    public void DespawnShield()
+    {
+        if (shield != null)
+        {
+            LeanPool.Despawn(shield);
+        }
     }
     public void Attack()
     {

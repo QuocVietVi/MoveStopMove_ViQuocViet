@@ -88,15 +88,15 @@ public class LevelManager : Singleton<LevelManager>
     //}
 
 
-    public void UnlockPant()
-    {
-        player.pantSkin = SkinManager.Instance.currentPant;
-        player.OnInit();
-        if (player.pantSkin == SkinManager.Instance.currentPant)
-        {
-            player.pantData.unlock = true;
-            player.pantData.isEqipped = true;
-        }
-    }
+    //public void UnlockPant()
+    //{
+    //    player.pantSkin = SkinManager.Instance.currentPant;
+    //    player.OnInit();
+    //    if (player.pantSkin == SkinManager.Instance.currentPant)
+    //    {
+    //        player.pantData.unlock = true;
+    //        player.pantData.isEqipped = true;
+    //    }
+    //}
 
 }

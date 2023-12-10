@@ -13,9 +13,9 @@ public class Player : Character
     [SerializeField] private float rotateSpeed;
 
     private Transform playerTf;
-
-
     private Vector3 moveVector;
+    public float gold;
+
     
 
     private void Awake()
@@ -42,6 +42,7 @@ public class Player : Character
         this.Range = 5;
         this.moveSpeed += pantData.moveSpeed;
         this.Range += weaponData.range + hatData.range;
+        gold = GameManager.Instance.PlayerData.golds;
         ChangeAnim(ConstantAnim.IDLE);
     }
 

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095f9dbc21c85d84fad42da19d8611e4, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: 
+  shields:
+  - shieldType: 0
+    gold: 0
+    image: {fileID: 0}
+    shieldPrefab: {fileID: 0}
+    price: 0
+  - shieldType: 1
+    gold: 1
+    image: {fileID: 21300000, guid: 0186e872acb4f0848b975336e2eafec4, type: 3}
+    shieldPrefab: {fileID: 5177984014007952061, guid: a6a892f7ff3ed1345be09a29f3ebe3d9, type: 3}
+    price: 500
+  - shieldType: 2
+    gold: 1
+    image: {fileID: 21300000, guid: b9c21604f3bb40446b7ca0a1b1847aed, type: 3}
+    shieldPrefab: {fileID: 5754345854047860745, guid: 806656bcf7fedd748b3addf65fdeb73f, type: 3}
+    price: 700
+  - shieldType: 3
+    gold: 1
+    image: {fileID: 21300000, guid: a0ba09fd821206449885b16828770aa0, type: 3}
+    shieldPrefab: {fileID: 6281151013722641652, guid: b0d7554029d144f4a94ff920962b6560, type: 3}
+    price: 900
+  - shieldType: 4
+    gold: 1
+    image: {fileID: 21300000, guid: 469e902068c24ea4f9f7f01e182b2ea1, type: 3}
+    shieldPrefab: {fileID: 8116650655614519172, guid: 5ac82c598b43ea342b07effea9866724, type: 3}
+    price: 900

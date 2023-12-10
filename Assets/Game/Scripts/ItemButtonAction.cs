@@ -9,14 +9,17 @@ public class ItemButtonAction : MonoBehaviour
 {
     [SerializeField] private Button button;
     private GameObject hat;
+    private GameObject shield;
     //private List<GameObject> listHats = new List<GameObject>();
     public Outline outline;
     public Image image;
     public PantType previewPant;
     //public Pant currentPant;
     public HatType previewHat;
+    public ShieldType previewShield;
     public Material material;
     public GameObject hatPrefab;
+    public GameObject shieldPrefab;
     public float price;
     
 
@@ -31,6 +34,10 @@ public class ItemButtonAction : MonoBehaviour
             if (SkinManager.Instance.canChooseHat == false)
             {
                 ChangeHat();
+            }
+            if (SkinManager.Instance.canChooseShield == false)
+            {
+                ChangeShield();
             }
         });
     }
@@ -58,7 +65,9 @@ public class ItemButtonAction : MonoBehaviour
         else
         {
             SkinManager.Instance.skinPrice.text = this.price.ToString();
+            SkinManager.Instance.goldImg.SetActive(true);
         }
+        SkinManager.Instance.currentPrice = this.price;
         //if (GameManager.Instance.PlayerData.listHatUnlock.Contains((int)SkinManager.Instance.currentHat))
         //{
         //    SkinManager.Instance.SetTextBtnBuy();
@@ -77,6 +86,7 @@ public class ItemButtonAction : MonoBehaviour
         {
             //LeanPool.Despawn(hat);
             SkinManager.Instance.currentHat = this.previewHat;
+            LevelManager.Instance.player.DespawnHat();
             SkinManager.Instance.DespawnHat();
             hat = LeanPool.Spawn(hatPrefab, LevelManager.Instance.player.hatHolder);
             SkinManager.Instance.hats.Add(hat);
@@ -89,7 +99,35 @@ public class ItemButtonAction : MonoBehaviour
         else
         {
             SkinManager.Instance.skinPrice.text = this.price.ToString();
+            SkinManager.Instance.goldImg.SetActive(true);
+
         }
+        SkinManager.Instance.currentPrice = this.price;
+
+    }
+
+    private void ChangeShield()
+    {
+        if (!SkinManager.Instance.canChooseShield)
+        {
+            SkinManager.Instance.currentShield = this.previewShield;
+            LevelManager.Instance.player.DespawnShield();
+            SkinManager.Instance.DespawnShield();
+            shield = LeanPool.Spawn(shieldPrefab, LevelManager.Instance.player.shieldHolder);
+            SkinManager.Instance.shields.Add(shield);
+        }
+        if (GameManager.Instance.PlayerData.listShieldUnlock.Contains((int)SkinManager.Instance.currentShield))
+        {
+            SkinManager.Instance.SetTextBtnBuy();
+        }
+        else
+        {
+            SkinManager.Instance.skinPrice.text = this.price.ToString();
+            SkinManager.Instance.goldImg.SetActive(true);
+
+        }
+        SkinManager.Instance.currentPrice = this.price;
+
     }
 
     //private void DespawnHat()

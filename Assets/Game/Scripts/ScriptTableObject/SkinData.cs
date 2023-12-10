@@ -30,6 +30,16 @@ public enum HatType
     Horn = 8
 }
 
+public enum ShieldType
+{
+    Default = 0,
+    Black_Panther = 1,
+    Skull = 2,
+    Pink_Star = 3,
+    Viet_Nam = 4
+
+}
+
 [Serializable]
 public class SkinData
 {
@@ -37,9 +47,9 @@ public class SkinData
     public float moveSpeed;
     public Sprite image;
     public Material material;
-    public bool unlock;
-    public bool isEqipped;
     public float price;
+    //public bool unlock;
+    //public bool isEqipped;
 }
 
 
@@ -50,8 +60,19 @@ public class HatData
     public float range;
     public Sprite image;
     public GameObject hatPrefab;
-    public bool unlock;
-    public bool isEqipped;
     public float price;
+    //public bool unlock;
+    //public bool isEqipped;
+}
+
+[Serializable]
+public class ShieldData
+{
+    public ShieldType shieldType;
+    public int gold;
+    public Sprite image;
+    public GameObject shieldPrefab;
+    public float price;
+
 }
 

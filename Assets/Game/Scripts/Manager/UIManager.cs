@@ -14,6 +14,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject weaponInShop;
     [SerializeField] private GameObject imageGold;
     [SerializeField] private Vector3 camOffset;
+    [SerializeField] private Text golds;
 
     public WeaponType currentWeapon;
     public GameObject subMenu;
@@ -35,6 +36,7 @@ public class UIManager : Singleton<UIManager>
         prevWeapon.onClick.AddListener(PrevWeapon);
         buyBtn.onClick.AddListener(BuyWeapon);
         openSkinShop.onClick.AddListener(OpenSkinShop);
+        SetTextGold(0f);
     }
 
     private void Update()
@@ -125,16 +127,20 @@ public class UIManager : Singleton<UIManager>
 
     private void BuyWeapon()
     {
-        currentWeapon = listWeapon[index].weaponType;
-        Debug.Log(currentWeapon.ToString());
-        if (weaponPrice.text != "Eqipped" && weaponPrice.text != "Select")
+        if (listWeapon[index].price < GameManager.Instance.PlayerData.golds)
         {
-            playerData.listWeaponUnlock.Add((int)currentWeapon);
+            currentWeapon = listWeapon[index].weaponType;
+            Debug.Log(currentWeapon.ToString());
+            if (weaponPrice.text != "Eqipped" && weaponPrice.text != "Select")
+            {
+                playerData.listWeaponUnlock.Add((int)currentWeapon);
+            }
+            playerData.weaponEquipped = (int)currentWeapon;
+            DataManager.Instance.SaveData(playerData);
+            SetWeaponInfo();
+            SetTextGold(listWeapon[index].price);
         }
-        playerData.weaponEquipped = (int)currentWeapon;
-        DataManager.Instance.SaveData(playerData);
-        SetWeaponInfo();
-
+        
         //CloseWShop();
     }
 
@@ -142,8 +148,16 @@ public class UIManager : Singleton<UIManager>
     {
         subMenu.SetActive(false);
         skinShop.SetActive(true);
+        skinShop.GetComponent<SkinManager>().enabled = true;
         CameraFollow.Instance.offset = camOffset;
         LevelManager.Instance.DanceAnim();
+        
+    }
+
+    public void SetTextGold(float price)
+    {
+        GameManager.Instance.PlayerData.golds -= price;
+        golds.text = GameManager.Instance.PlayerData.golds.ToString();
     }
 
 
