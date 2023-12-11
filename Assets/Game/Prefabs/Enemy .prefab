@@ -176,18 +176,23 @@ MonoBehaviour:
     moveSpeed: 0
     image: {fileID: 0}
     material: {fileID: 0}
-    unlock: 0
-    isEqipped: 0
+    price: 0
   pantSkin: 0
   hatData:
     hatType: 0
     range: 0
     image: {fileID: 0}
     hatPrefab: {fileID: 0}
-    unlock: 0
-    isEqipped: 0
+    price: 0
   hatType: 0
-  hatHolder: {fileID: 0}
+  hatHolder: {fileID: 2245548609507450760}
+  shieldData:
+    shieldType: 0
+    gold: 0
+    image: {fileID: 0}
+    shieldPrefab: {fileID: 0}
+    price: 0
+  shieldHolder: {fileID: 0}
   agent: {fileID: 1621629007152972338}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
@@ -525,6 +530,37 @@ MonoBehaviour:
   levelTxt: {fileID: 3405988478678171344}
   nameTxt: {fileID: 1266082379283120760}
   character: {fileID: 1621629007152972339}
+--- !u!1 &6590806301314758616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2245548609507450760}
+  m_Layer: 0
+  m_Name: Hat Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2245548609507450760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590806301314758616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6756289951348245840}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7358526266984253277
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +918,11 @@ Animator:
 --- !u!4 &6051600068872744226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1621629007851816504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6756289951348245840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 1621629007851816504}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &7937265920173053361 stripped

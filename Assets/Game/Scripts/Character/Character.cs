@@ -79,12 +79,18 @@ public class Character : MonoBehaviour
     private void Update()
     {
         rb.AddForce(Physics.gravity * gravityScale, ForceMode.Acceleration);
-        AttackRange();
+        if (GameManager.Instance.IsState(GameState.GamePlay))
+        {
+            AttackRange();
+        }
 
     }
     public virtual void OnInit()
     {
         isDead = false;
+        collider.enabled = true;
+        gravityScale = 9;
+
         weaponData = GameManager.Instance.GetWeponData((WeaponType)GameManager.Instance.PlayerData.weaponEquipped);
         currentWeapon = weaponData.weapon;
         bulletSpeed = weaponData.speed;

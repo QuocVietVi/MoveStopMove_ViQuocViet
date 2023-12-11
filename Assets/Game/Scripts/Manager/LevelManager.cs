@@ -41,14 +41,20 @@ public class LevelManager : Singleton<LevelManager>
         }
         
     }
+
+    public void OnInit()
+    {
+        maxEnemiesOnGround = 15;
+        maxEnemies = 50;
+    }
     public void SpawnPlayer()
     {
         //this.gameObject.SetActive(false);
         //Instantiate(playerPrefab, startPoint.position, Quaternion.identity);
         player = LeanPool.Spawn(playerPrefab, startPoint.position, playerPrefab.transform.rotation);
-        CameraFollow.Instance.FindPlayer();
         player.weaponType = UIManager.Instance.currentWeapon;
         player.OnInit();
+        CameraFollow.Instance.FindPlayer();
     }
 
     public void DeSpawnPlayer()
@@ -74,6 +80,15 @@ public class LevelManager : Singleton<LevelManager>
         enemy.transform.position = new Vector3(posX, 0, posZ);
         enemy.OnInit();
         listEnemies.Add(enemy);
+    }
+
+    public void DespawnAllEnemy()
+    {
+        for (int i = 0; i < listEnemies.Count; i++)
+        {
+            LeanPool.Despawn(listEnemies[i].gameObject);
+        }
+        listEnemies.Clear();
     }
 
     public void DanceAnim()

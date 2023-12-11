@@ -8,6 +8,7 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private Text enemyAlive;
     [SerializeField] private float numberEnemiesAlive;
+    //mainmenu
     [SerializeField] private Button play,openWeaponShop, closeWeaponShop, prevWeapon, nextWeapon, buyBtn, openSkinShop;
     [SerializeField] private Text weaponName, weaponPrice;
     [SerializeField] private GameObject mainMenu, alive, weaponShop, skinShop;
@@ -15,6 +16,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject imageGold;
     [SerializeField] private Vector3 camOffset;
     [SerializeField] private Text golds;
+    //revive panel
+    [SerializeField] private GameObject revivePanel,gameOverPanel;
+    [SerializeField] private Button closeRevivePanel, reviveBtn;
+    [SerializeField] private Text reviveText, revivePriceTxt;
+    [SerializeField] private Image reviveCicle;
+    //Gameover panel
+    [SerializeField] private Button continueBtn;
 
     public WeaponType currentWeapon;
     public GameObject subMenu;
@@ -22,6 +30,7 @@ public class UIManager : Singleton<UIManager>
     private int index;
     private Weapon weapon;
     private PlayerData playerData;
+    private float timeCountDown, revivePrice;
     
     private void Start()
     {
@@ -36,13 +45,29 @@ public class UIManager : Singleton<UIManager>
         prevWeapon.onClick.AddListener(PrevWeapon);
         buyBtn.onClick.AddListener(BuyWeapon);
         openSkinShop.onClick.AddListener(OpenSkinShop);
+        continueBtn.onClick.AddListener(Continue);
+        closeRevivePanel.onClick.AddListener(GameOverPopup);
         SetTextGold(0f);
+        timeCountDown = 5;
+        revivePrice = 150f;
+        LevelManager.Instance.player.Dead -= RevivePopup;
+        LevelManager.Instance.player.Dead += RevivePopup;
+        //GameManager.Instance.ChangeState(GameState.GameOver);
     }
 
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
-
+        if (GameManager.Instance.IsState(GameState.Revive))
+        {
+            timeCountDown -= 1 * Time.deltaTime;
+            reviveText.text = timeCountDown.ToString("0");
+            reviveCicle.transform.Rotate(0,0,-360 * Time.deltaTime);
+            if (timeCountDown <= 0)
+            {
+                GameOverPopup();
+            }
+        }
     }
     //private void OnInit()
     //{
@@ -158,6 +183,32 @@ public class UIManager : Singleton<UIManager>
     {
         GameManager.Instance.PlayerData.golds -= price;
         golds.text = GameManager.Instance.PlayerData.golds.ToString();
+    }
+
+    public void RevivePopup()
+    {
+        GameManager.Instance.ChangeState(GameState.Revive);
+        revivePanel.SetActive(true);
+
+    }
+
+    private void GameOverPopup()
+    {
+        gameOverPanel.SetActive(true);
+        revivePanel.SetActive(false);
+        GameManager.Instance.ChangeState(GameState.GameOver);
+    }
+
+    private void Continue()
+    {
+        gameOverPanel.SetActive(false);
+        mainMenu.SetActive(true);
+        GameManager.Instance.ChangeState(GameState.MainMenu);
+        LevelManager.Instance.DeSpawnPlayer();
+        LevelManager.Instance.SpawnPlayer();
+        LevelManager.Instance.DespawnAllEnemy();
+        LevelManager.Instance.OnInit();
+        CameraFollow.Instance.OnInit();
     }
 
 

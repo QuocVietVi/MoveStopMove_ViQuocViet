@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum GameState
 {
-    MainMenu, ChooseWeapon, GamePlay, Finish
+    MainMenu, GamePlay,Revive, GameOver, Finish
 }
 
 public class GameManager : Singleton<GameManager>

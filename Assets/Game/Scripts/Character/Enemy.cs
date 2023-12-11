@@ -36,8 +36,6 @@ public class Enemy : Character
     {
         base.OnInit();
         canAttack = true;
-        gravityScale = 9;
-        collider.enabled = true;
         
         if (this.Range + weaponData.range > this.Range)
         {

@@ -1,4 +1,5 @@
 using Lean.Pool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ public class Player : Character
     private Transform playerTf;
     private Vector3 moveVector;
     public float gold;
+    public Action Dead;
 
     
 
@@ -42,6 +44,7 @@ public class Player : Character
         this.Range = 5;
         this.moveSpeed += pantData.moveSpeed;
         this.Range += weaponData.range + hatData.range;
+        
         gold = GameManager.Instance.PlayerData.golds;
         ChangeAnim(ConstantAnim.IDLE);
     }
@@ -84,7 +87,7 @@ public class Player : Character
         base.AttackRange();
         if (isDead == false)
         {
-            Enemy enemy = target.GetComponent<Enemy>();
+            //Enemy enemy = target.GetComponent<Enemy>();
             if (enemyInRange[0] != this.collider)
             {
                 target = enemyInRange[0].transform;
@@ -97,22 +100,22 @@ public class Player : Character
             {
                 target = null;
             }
-            if (enemy != null)
-            {
-                //if (target != null)
-                //{
-                //    enemy.ActiveTargetPoint();
-                //}
-                //else
-                //{
-                //    enemy.DeActiveTargetPoint();
-                //}
-                enemy.targetPoint.SetActive(true);
-            }
-            else
-            {
-                return;
-            }
+            //if (enemy != null)
+            //{
+            //    //if (target != null)
+            //    //{
+            //    //    enemy.ActiveTargetPoint();
+            //    //}
+            //    //else
+            //    //{
+            //    //    enemy.DeActiveTargetPoint();
+            //    //}
+            //    enemy.targetPoint.SetActive(true);
+            //}
+            //else
+            //{
+            //    return;
+            //}
            
         }
         
@@ -123,7 +126,7 @@ public class Player : Character
         base.OnDead();
         moveSpeed = 0.0f;
         joystick.enabled = false;
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -137,6 +140,7 @@ public class Player : Character
             }
             else {
                 OnDead();
+                Dead?.Invoke();
                 bullet.OnDespawn();
             }
         }
