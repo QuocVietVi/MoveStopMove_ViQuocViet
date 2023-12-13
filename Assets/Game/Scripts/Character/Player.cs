@@ -23,7 +23,7 @@ public class Player : Character
     private void Awake()
     {
 
-        this.joystick = GameManager.Instance.floatingJoystick;
+       
         playerTf = this.transform;
 
     }
@@ -40,11 +40,13 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        this.level = 1;
         this.moveSpeed = 10;
         this.Range = 5;
         this.moveSpeed += pantData.moveSpeed;
         this.Range += weaponData.range + hatData.range;
-        
+        this.joystick = GameManager.Instance.floatingJoystick;
+        joystick.enabled = true;
         gold = GameManager.Instance.PlayerData.golds;
         ChangeAnim(ConstantAnim.IDLE);
     }

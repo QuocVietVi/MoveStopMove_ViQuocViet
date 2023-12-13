@@ -50,24 +50,24 @@ public class UIManager : Singleton<UIManager>
         SetTextGold(0f);
         timeCountDown = 5;
         revivePrice = 150f;
-        LevelManager.Instance.player.Dead -= RevivePopup;
-        LevelManager.Instance.player.Dead += RevivePopup;
+        LevelManager.Instance.player.Dead -= GameOverPopup;
+        LevelManager.Instance.player.Dead += GameOverPopup;
         //GameManager.Instance.ChangeState(GameState.GameOver);
     }
 
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
-        if (GameManager.Instance.IsState(GameState.Revive))
-        {
-            timeCountDown -= 1 * Time.deltaTime;
-            reviveText.text = timeCountDown.ToString("0");
-            reviveCicle.transform.Rotate(0,0,-360 * Time.deltaTime);
-            if (timeCountDown <= 0)
-            {
-                GameOverPopup();
-            }
-        }
+        //if (GameManager.Instance.IsState(GameState.Revive))
+        //{
+        //    timeCountDown -= 1 * Time.deltaTime;
+        //    reviveText.text = timeCountDown.ToString("0");
+        //    reviveCicle.transform.Rotate(0,0,-360 * Time.deltaTime);
+        //    if (timeCountDown <= 0)
+        //    {
+        //        GameOverPopup();
+        //    }
+        //}
     }
     //private void OnInit()
     //{
@@ -80,6 +80,7 @@ public class UIManager : Singleton<UIManager>
         CameraFollow.Instance.offset = new Vector3(0f, 15f, -19f);
         LevelManager.Instance.SpawnEnemies();
         GameManager.Instance.ChangeState(GameState.GamePlay);
+        
     }
 
     private void OpenWShop()
@@ -210,6 +211,8 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.OnInit();
         CameraFollow.Instance.OnInit();
     }
+
+
 
 
 
