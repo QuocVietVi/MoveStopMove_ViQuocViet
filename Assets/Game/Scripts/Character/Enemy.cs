@@ -11,7 +11,6 @@ public class Enemy : Character
     [SerializeField] private float walkPointRange;
     [SerializeField] private LayerMask layerGround;
     public GameObject targetPoint;
-
     private IState currentState;
     private bool walkPointSet;
 
@@ -167,6 +166,19 @@ public class Enemy : Character
                 bullet.OnDespawn();
                 LevelManager.Instance.listEnemies.Remove(this);
                 LevelManager.Instance.maxEnemies--;
+                //if (GameManager.Instance.IsState(GameState.GamePlay))
+                //{
+                //    if (LevelManager.Instance.listEnemies.Count < LevelManager.Instance.maxEnemiesOnGround)
+                //    {
+                //        int posX = Random.Range(-42, 42);
+                //        int posZ = Random.Range(-38, 38);
+                //        LevelManager.Instance.SpawnEnemy(posX,posZ);
+                //    }
+                //    if (LevelManager.Instance.listEnemies.Count > LevelManager.Instance.maxEnemies - 2)
+                //    {
+                //        LevelManager.Instance.enabled = false;
+                //    }
+                //}
 
             }
         }

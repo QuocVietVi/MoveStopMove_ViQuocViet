@@ -7,7 +7,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
 {
     public Text levelTxt;
     public Text nameTxt;
-    CharName charName;
+    public CharName charName;
     [SerializeField] Character character;
 
     private void Start()

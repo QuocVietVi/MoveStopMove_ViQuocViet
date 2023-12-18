@@ -1,4 +1,5 @@
 using Lean.Pool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,14 +24,15 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Image reviveCicle;
     //Gameover panel
     [SerializeField] private Button continueBtn;
-
-    public WeaponType currentWeapon;
-    public GameObject subMenu;
+    [SerializeField] private Text rankTxt;
+    public Text killerName;
     private List<WeaponData> listWeapon;
     private int index;
     private Weapon weapon;
     private PlayerData playerData;
     private float timeCountDown, revivePrice;
+    public WeaponType currentWeapon;
+    public GameObject subMenu;
     
     private void Start()
     {
@@ -197,6 +199,7 @@ public class UIManager : Singleton<UIManager>
     {
         gameOverPanel.SetActive(true);
         revivePanel.SetActive(false);
+        rankTxt.text = "#" + LevelManager.Instance.maxEnemies.ToString();
         GameManager.Instance.ChangeState(GameState.GameOver);
     }
 

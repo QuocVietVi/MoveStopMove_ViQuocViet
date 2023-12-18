@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -144,6 +143,7 @@ public class Player : Character
                 OnDead();
                 Dead?.Invoke();
                 bullet.OnDespawn();
+                UIManager.Instance.killerName.text = bullet.attacker.charName;
             }
         }
     }

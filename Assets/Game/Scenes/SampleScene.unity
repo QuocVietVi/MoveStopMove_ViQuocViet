@@ -1928,9 +1928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 1051637471}
-  maxEnemiesOnGround: 20
+  maxEnemiesOnGround: 15
+  maxEnemies: 17
   characterLevel: 0
-  maxEnemies: 50
   listEnemies: []
   playerPrefab: {fileID: 9195992557692326748, guid: 8fec425b472184d44908d99defcb488b, type: 3}
   enemyPrefab: {fileID: 1621629007152972339, guid: 7d05d4e5e9cf5bc44acad63148b3926b, type: 3}
@@ -2654,11 +2654,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791961219459, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263252, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960786
       objectReference: {fileID: 0}
     - target: {fileID: 8170153792821263259, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_IsActive
@@ -4206,6 +4218,8 @@ MonoBehaviour:
   revivePriceTxt: {fileID: 0}
   reviveCicle: {fileID: 745537236}
   continueBtn: {fileID: 2127918009}
+  rankTxt: {fileID: 795284678}
+  killerName: {fileID: 254225670}
   currentWeapon: 0
   subMenu: {fileID: 941483170}
 --- !u!1 &932485462
@@ -4898,6 +4912,7 @@ MonoBehaviour:
   pant: {fileID: 0}
   throwPoint: {fileID: 1302648027}
   level: 0
+  charName: 
   target: {fileID: 0}
   weaponData:
     bullet: {fileID: 0}

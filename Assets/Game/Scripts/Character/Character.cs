@@ -44,6 +44,7 @@ public class Character : MonoBehaviour
     protected bool isDead;
     public Transform throwPoint;
     public float level;
+    public string charName;
     public Transform target;
     public WeaponData weaponData;
     public WeaponType weaponType;
@@ -71,7 +72,7 @@ public class Character : MonoBehaviour
     {
         level = 1;
         OnInit();
-        
+        this.charName = PlayerInfoManager.Instance.charName.ToString();
 
     }
 

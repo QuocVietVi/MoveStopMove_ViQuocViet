@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform startPoint;
-    [SerializeField] private float maxEnemiesOnGround;
     private float posX, posZ;
-    public int characterLevel;
+    private Enemy enemy;
+    public float maxEnemiesOnGround;
     public float maxEnemies;
+    public int characterLevel;
     public List<Enemy> listEnemies = new List<Enemy>();
     public Player playerPrefab;
     public Enemy enemyPrefab;
@@ -21,24 +22,24 @@ public class LevelManager : Singleton<LevelManager>
     private void Start()
     {
         SpawnPlayer();
-
     }
 
     private void Update()
     {
-        if (GameManager.Instance.IsState(GameState.GamePlay))
-        {
-            if (listEnemies.Count < maxEnemiesOnGround)
-            {
-                posX = Random.Range(-42, 42);
-                posZ = Random.Range(-38, 38);
-                SpawnEnemy();
-            }
-            if (listEnemies.Count > maxEnemies - 2)
-            {
-                this.enabled = false;
-            }
-        }
+        //if (GameManager.Instance.IsState(GameState.GamePlay))
+        //{
+        //    if (listEnemies.Count < maxEnemiesOnGround)
+        //    {
+        //        posX = Random.Range(-42, 42);
+        //        posZ = Random.Range(-38, 38);
+        //        SpawnEnemy();
+        //    }
+        //    if (listEnemies.Count > maxEnemies - 2)
+        //    {
+        //        this.enabled = false;
+        //    }
+        //}
+        CheckNumberEnemies();
         
     }
 
@@ -69,15 +70,15 @@ public class LevelManager : Singleton<LevelManager>
         {
             posX = Random.Range(-50, 50);
             posZ = Random.Range(-38, 38);
-            SpawnEnemy();
+            SpawnEnemy(posX,posZ);
         }
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy(float x, float z)
     {
         //Enemy enemy = Instantiate(enemyPrefab, new Vector3(posX, 0, posZ), Quaternion.identity);
-        Enemy enemy = LeanPool.Spawn(enemyPrefab);
-        enemy.transform.position = new Vector3(posX, 0, posZ);
+        enemy = LeanPool.Spawn(enemyPrefab);
+        enemy.transform.position = new Vector3(x, 0, z);
         enemy.OnInit();
         listEnemies.Add(enemy);
     }
@@ -94,6 +95,23 @@ public class LevelManager : Singleton<LevelManager>
     public void DanceAnim()
     {
         player.ChangeAnim(ConstantAnim.DANCE);
+    }
+
+    public void CheckNumberEnemies()
+    {
+        if (GameManager.Instance.IsState(GameState.GamePlay))
+        {
+            if (listEnemies.Count < maxEnemiesOnGround)
+            {
+                posX = Random.Range(-42, 42);
+                posZ = Random.Range(-38, 38);
+                SpawnEnemy(posX, posZ);
+            }
+            if (listEnemies.Count > maxEnemies - 2)
+            {
+                this.enabled = false;
+            }
+        }
     }
 
     //public void ChangePant()

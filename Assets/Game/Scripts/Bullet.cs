@@ -1,5 +1,4 @@
 using Lean.Pool;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -52,6 +51,7 @@ public class Bullet : MonoBehaviour
             if (attacker == LevelManager.Instance.player)
             {
                 LevelManager.Instance.player.gold++;
+                DataManager.Instance.SaveData(GameManager.Instance.PlayerData);
             }
             
             //OnDespawn();
