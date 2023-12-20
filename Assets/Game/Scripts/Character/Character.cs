@@ -1,4 +1,5 @@
 using Lean.Pool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,7 @@ public class Character : MonoBehaviour
     public Transform hatHolder;
     public ShieldData shieldData;
     public Transform shieldHolder;
+    public Action Dead;
     public float Range
     {
         get => range; set
@@ -89,9 +91,9 @@ public class Character : MonoBehaviour
     public virtual void OnInit()
     {
         isDead = false;
-        collider.enabled = true;
+        //collider.enabled = true;
         gravityScale = 9;
-
+        this.gameObject.layer = LayerMask.NameToLayer(ConstantTag.ENEMY);
         weaponData = GameManager.Instance.GetWeponData((WeaponType)GameManager.Instance.PlayerData.weaponEquipped);
         currentWeapon = weaponData.weapon;
         bulletSpeed = weaponData.speed;
@@ -113,6 +115,16 @@ public class Character : MonoBehaviour
         }
 
 
+    }
+    protected virtual void OnDead()
+    {
+        canAttack = false;
+        isDead = true;
+        //gravityScale = 0;
+        //collider.enabled = false;
+        this.gameObject.layer = LayerMask.NameToLayer(ConstantTag.DEFAULT);
+        ChangeAnim(ConstantAnim.DEAD);
+        //Destroy(gameObject, 1f);
     }
     public void Despawn()
     {
@@ -185,15 +197,6 @@ public class Character : MonoBehaviour
         //}
     }
 
-    protected virtual void OnDead()
-    {
-        canAttack = false;
-        isDead = true;
-        gravityScale = 0;
-        collider.enabled = false;
-        ChangeAnim(ConstantAnim.DEAD);
-        //Destroy(gameObject, 1f);
-    }
 
 
 

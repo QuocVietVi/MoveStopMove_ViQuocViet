@@ -25,6 +25,10 @@ public class UIManager : Singleton<UIManager>
     //Gameover panel
     [SerializeField] private Button continueBtn;
     [SerializeField] private Text rankTxt;
+
+    //Win panel
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private Button nextLevel;
     public Text killerName;
     private List<WeaponData> listWeapon;
     private int index;
@@ -54,12 +58,14 @@ public class UIManager : Singleton<UIManager>
         revivePrice = 150f;
         LevelManager.Instance.player.Dead -= GameOverPopup;
         LevelManager.Instance.player.Dead += GameOverPopup;
+        nextLevel.onClick.AddListener(NextLevel);
         //GameManager.Instance.ChangeState(GameState.GameOver);
     }
 
     private void Update()
     {
         enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
+        WinPopup();
         //if (GameManager.Instance.IsState(GameState.Revive))
         //{
         //    timeCountDown -= 1 * Time.deltaTime;
@@ -197,10 +203,13 @@ public class UIManager : Singleton<UIManager>
 
     private void GameOverPopup()
     {
-        gameOverPanel.SetActive(true);
-        revivePanel.SetActive(false);
-        rankTxt.text = "#" + LevelManager.Instance.maxEnemies.ToString();
-        GameManager.Instance.ChangeState(GameState.GameOver);
+        if (LevelManager.Instance.maxEnemies > 1)
+        {
+            gameOverPanel.SetActive(true);
+            revivePanel.SetActive(false);
+            rankTxt.text = "#" + LevelManager.Instance.maxEnemies.ToString();
+            GameManager.Instance.ChangeState(GameState.GameOver);
+        }
     }
 
     private void Continue()
@@ -212,10 +221,30 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.SpawnPlayer();
         LevelManager.Instance.DespawnAllEnemy();
         LevelManager.Instance.OnInit();
-        CameraFollow.Instance.OnInit();
+
     }
 
+    private void WinPopup()
+    {
+        if (LevelManager.Instance.maxEnemies <= 1)
+        {
+            //GameManager.Instance.ChangeState(GameState.Finish);
+            winPanel.SetActive(true);
+        }
+    }
 
+    private void NextLevel()
+    {
+        winPanel.SetActive(false);
+        mainMenu.SetActive(true) ;
+        GameManager.Instance.ChangeState(GameState.MainMenu);
+        LevelManager.Instance.NextLevel();
+        LevelManager.Instance.DeSpawnPlayer();
+        LevelManager.Instance.SpawnPlayer();
+        LevelManager.Instance.DespawnAllEnemy();
+        LevelManager.Instance.OnInit();
+
+    }
 
 
 

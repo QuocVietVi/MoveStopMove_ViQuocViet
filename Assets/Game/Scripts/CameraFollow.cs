@@ -45,7 +45,10 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         if (player != null)
         {
-            camera.DOMove(player.transform.position + offset, speed * Time.fixedDeltaTime);
+            //camera.DOMove(player.transform.position + offset, speed * Time.fixedDeltaTime);
+            Vector3 desiredPosition = player.transform.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, speed * Time.fixedDeltaTime);
+            camera.position = smoothedPosition;
         }
 
 

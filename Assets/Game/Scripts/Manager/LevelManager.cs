@@ -9,7 +9,8 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Transform startPoint;
     private float posX, posZ;
-    private Enemy enemy;
+    private int level;
+    public GameObject currentMap;
     public float maxEnemiesOnGround;
     public float maxEnemies;
     public int characterLevel;
@@ -17,11 +18,15 @@ public class LevelManager : Singleton<LevelManager>
     public Player playerPrefab;
     public Enemy enemyPrefab;
     public Player player;
+    public Enemy enemy;
+
     
 
     private void Start()
     {
         SpawnPlayer();
+        level = 1;
+        OnInit();
     }
 
     private void Update()
@@ -46,7 +51,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnInit()
     {
         maxEnemiesOnGround = 15;
-        maxEnemies = 50;
+        maxEnemies = 20;
     }
     public void SpawnPlayer()
     {
@@ -56,6 +61,7 @@ public class LevelManager : Singleton<LevelManager>
         player.weaponType = UIManager.Instance.currentWeapon;
         player.OnInit();
         CameraFollow.Instance.FindPlayer();
+        CameraFollow.Instance.OnInit();
     }
 
     public void DeSpawnPlayer()
@@ -114,6 +120,23 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public void LoadMap(int map)
+    {
+        currentMap = Instantiate(Resources.Load<GameObject>(ConstantName.MAP + map));
+        DeSpawnPlayer();
+        Invoke(nameof(SpawnPlayer), 0.5f);
+    }
+
+    public void NextLevel()
+    {
+        if (currentMap != null)
+        {
+            Destroy(currentMap);
+        }
+        level++;
+        LoadMap(level);
+    }
+
     //public void ChangePant()
     //{
 
@@ -133,3 +156,4 @@ public class LevelManager : Singleton<LevelManager>
     //}
 
 }
+

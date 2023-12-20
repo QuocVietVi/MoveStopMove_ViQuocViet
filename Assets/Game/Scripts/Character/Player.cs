@@ -15,7 +15,7 @@ public class Player : Character
     private Transform playerTf;
     private Vector3 moveVector;
     public float gold;
-    public Action Dead;
+
 
     
 
@@ -49,7 +49,13 @@ public class Player : Character
         gold = GameManager.Instance.PlayerData.golds;
         ChangeAnim(ConstantAnim.IDLE);
     }
+    protected override void OnDead()
+    {
+        base.OnDead();
+        moveSpeed = 0.0f;
+        joystick.enabled = false;
 
+    }
 
 
     private void Move()
@@ -122,13 +128,7 @@ public class Player : Character
         
     }
 
-    protected override void OnDead()
-    {
-        base.OnDead();
-        moveSpeed = 0.0f;
-        joystick.enabled = false;
-        
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {

@@ -9,6 +9,8 @@ public static class ConstantTag
     public static string ENEMY = "Enemy";
 
     public static string WEAPON = "Weapon";
+
+    public static string DEFAULT = "Default";
 }
 
 
@@ -21,4 +23,9 @@ public static class ConstantAnim
     public static string DEAD = "Dead";
     public static string WIN = "Win";
     public static string DANCE = "Dance";
+}
+
+public static class ConstantName
+{
+    public static string MAP = "Map";
 }

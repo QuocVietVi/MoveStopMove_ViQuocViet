@@ -43,7 +43,12 @@ public class Enemy : Character
         ChangeState(new PatrolState());
 
     }
-
+    protected override void OnDead()
+    {
+        base.OnDead();
+        ChangeState(null);
+        Invoke(nameof(Despawn), 1f);
+    }
     public void Moving()
     {
         if (!walkPointSet) { SearchWalkPoint(); }
@@ -119,12 +124,7 @@ public class Enemy : Character
         
 
     }
-    protected override void OnDead()
-    {
-        base.OnDead();
-        ChangeState(null);
-        Invoke(nameof(Despawn),1f);
-    }
+
 
     public void ActiveTargetPoint()
     {
@@ -166,19 +166,6 @@ public class Enemy : Character
                 bullet.OnDespawn();
                 LevelManager.Instance.listEnemies.Remove(this);
                 LevelManager.Instance.maxEnemies--;
-                //if (GameManager.Instance.IsState(GameState.GamePlay))
-                //{
-                //    if (LevelManager.Instance.listEnemies.Count < LevelManager.Instance.maxEnemiesOnGround)
-                //    {
-                //        int posX = Random.Range(-42, 42);
-                //        int posZ = Random.Range(-38, 38);
-                //        LevelManager.Instance.SpawnEnemy(posX,posZ);
-                //    }
-                //    if (LevelManager.Instance.listEnemies.Count > LevelManager.Instance.maxEnemies - 2)
-                //    {
-                //        LevelManager.Instance.enabled = false;
-                //    }
-                //}
 
             }
         }
