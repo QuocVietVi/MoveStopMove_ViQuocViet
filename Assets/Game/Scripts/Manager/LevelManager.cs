@@ -78,6 +78,7 @@ public class LevelManager : Singleton<LevelManager>
             posZ = Random.Range(-38, 38);
             SpawnEnemy(posX,posZ);
         }
+        this.enabled = true;
     }
 
     public void SpawnEnemy(float x, float z)
@@ -113,7 +114,7 @@ public class LevelManager : Singleton<LevelManager>
                 posZ = Random.Range(-38, 38);
                 SpawnEnemy(posX, posZ);
             }
-            if (listEnemies.Count > maxEnemies - 2)
+            if (listEnemies.Count > maxEnemies -2)
             {
                 this.enabled = false;
             }

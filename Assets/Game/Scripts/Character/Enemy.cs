@@ -48,6 +48,14 @@ public class Enemy : Character
         base.OnDead();
         ChangeState(null);
         Invoke(nameof(Despawn), 1f);
+        //if (LevelManager.Instance.maxEnemies > LevelManager.Instance.listEnemies.Count)
+        //{
+        //    LevelManager.Instance.CheckNumberEnemies();
+        //}
+        //if (LevelManager.Instance.listEnemies.Count > LevelManager.Instance.maxEnemies - 3)
+        //{
+        //    LevelManager.Instance.enabled = false;
+        //}
     }
     public void Moving()
     {

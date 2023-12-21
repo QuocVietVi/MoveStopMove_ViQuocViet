@@ -37,16 +37,17 @@ public class SkinManager : Singleton<SkinManager>
         player = LevelManager.Instance.player;
         canChoosePant = true;
         canChooseHat = true;
+        canChooseShield = true;
         pantBtn.onClick.AddListener(SpawnPantItem);
         closeBtn.onClick.AddListener(CloseSkinShop);
         buyBtn.onClick.AddListener(BuySkin);
         hatBtn.onClick.AddListener(SpawnHatItem);
         shieldBtn.onClick.AddListener(SpawnShieldItem);
     }
-    private void OnEnable()
-    {
-        SpawnHatItem();
-    }
+    //private void OnEnable()
+    //{
+    //    SpawnHatItem();
+    //}
     private void SpawnPantItem()
     {
         if (canChoosePant == true)
@@ -93,7 +94,7 @@ public class SkinManager : Singleton<SkinManager>
 
     private void SpawnShieldItem()
     {
-        if (canChoosePant == true)
+        if (canChooseShield == true)
         {
             DespawnItem();
             for (int i = 1; i < listShields.Count; i++)
@@ -164,6 +165,7 @@ public class SkinManager : Singleton<SkinManager>
                 SetTextBtnBuy();
             }
             UIManager.Instance.SetTextGold(currentPrice);
+            
         }
 
     }

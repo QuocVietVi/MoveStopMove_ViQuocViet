@@ -51,6 +51,7 @@ public class Bullet : MonoBehaviour
             if (attacker == LevelManager.Instance.player)
             {
                 LevelManager.Instance.player.gold++;
+                GameManager.Instance.PlayerData.golds = LevelManager.Instance.player.gold;
                 DataManager.Instance.SaveData(GameManager.Instance.PlayerData);
             }
             

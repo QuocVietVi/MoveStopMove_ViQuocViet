@@ -2,6 +2,7 @@ using Lean.Common;
 using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class ItemButtonAction : MonoBehaviour
     [SerializeField] private Button button;
     private GameObject hat;
     private GameObject shield;
+    private bool isPressed;
     //private List<GameObject> listHats = new List<GameObject>();
     public Outline outline;
     public Image image;
@@ -21,6 +23,7 @@ public class ItemButtonAction : MonoBehaviour
     public GameObject hatPrefab;
     public GameObject shieldPrefab;
     public float price;
+    public GameObject imgUnlock;
     
 
     private void Start()
@@ -35,10 +38,13 @@ public class ItemButtonAction : MonoBehaviour
             {
                 ChangeHat();
             }
+
             if (SkinManager.Instance.canChooseShield == false)
             {
                 ChangeShield();
             }
+            outline.enabled = true;
+
         });
     }
 

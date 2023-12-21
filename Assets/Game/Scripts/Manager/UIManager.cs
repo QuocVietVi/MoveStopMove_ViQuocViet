@@ -64,7 +64,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        enemyAlive.text = "Alive : " + LevelManager.Instance.maxEnemies.ToString();
+        enemyAlive.text = "Alive : " + (LevelManager.Instance.maxEnemies).ToString();
         WinPopup();
         //if (GameManager.Instance.IsState(GameState.Revive))
         //{
@@ -182,7 +182,8 @@ public class UIManager : Singleton<UIManager>
     {
         subMenu.SetActive(false);
         skinShop.SetActive(true);
-        skinShop.GetComponent<SkinManager>().enabled = true;
+        //skinShop.GetComponent<SkinManager>().enabled = true;
+        SkinManager.Instance.SpawnHatItem();
         CameraFollow.Instance.offset = camOffset;
         LevelManager.Instance.DanceAnim();
         
@@ -221,7 +222,7 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.SpawnPlayer();
         LevelManager.Instance.DespawnAllEnemy();
         LevelManager.Instance.OnInit();
-
+        SetTextGold(0);
     }
 
     private void WinPopup()
@@ -243,7 +244,7 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.SpawnPlayer();
         LevelManager.Instance.DespawnAllEnemy();
         LevelManager.Instance.OnInit();
-
+        SetTextGold(0);
     }
 
 
